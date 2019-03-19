@@ -12,6 +12,9 @@ class TriRet extends CGFobject {
         this.vertices = [
             -1, 1, 0,	//0
             -1, -1, 0,	//1
+            1, -1, 0,	//2
+            - 1, 1, 0,	//0
+            -1, -1, 0,	//1
             1, -1, 0	//2
         ];
 
@@ -19,6 +22,22 @@ class TriRet extends CGFobject {
         this.indices = [
             0, 1, 2
         ];
+
+        this.normals = [
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1
+        ];
+
+        var aux = this.indices.slice(0);
+
+        aux.reverse();
+
+        this.indices = this.indices.concat(aux);
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
