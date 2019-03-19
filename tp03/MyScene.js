@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.unitCube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'UnitCube': 4};
+        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'UnitCube': 4 };
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -123,6 +123,13 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        //Cor semelhante à madeira (no ambient, no specular)
+        this.woodColor = new CGFappearance(this);
+        this.woodColor.setAmbient(159 / 255, 81 / 255, 17 / 255, 1.0);
+        this.woodColor.setDiffuse(159 / 400, 81 / 400, 17 / 400, 1.0);
+        this.woodColor.setSpecular(159 / 255, 81 / 255, 17 / 255, 0.3);
+        this.woodColor.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -136,10 +143,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.woodColor];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3, 'Wood Color': 4 };
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
