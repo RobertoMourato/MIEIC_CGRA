@@ -27,7 +27,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
 
         //AmbientLight - US
-        this.gui.add(this.scene, 'globalAmbientLight', 0.00, 1.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
+        this.gui.add(this.scene, 'globalAmbientLight', 0.00, 1.0).name('GlobalAmbientLight');
 
         this.gui.add(this.scene, 'selectedMaterial', this.scene.materialIDs).name('Selected Material');
 
