@@ -43,6 +43,8 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayQuad = false;
+        this.displayQuadMaterial = false;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -106,6 +108,10 @@ class MyScene extends CGFscene {
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
+        if (this.displayQuad)
+            this.quad.display();
+        if (!this.displayQuadMaterial)
+            this.quadMaterial.display();
 
         this.setDefaultAppearance();
 
