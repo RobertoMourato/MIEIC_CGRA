@@ -29,7 +29,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.MineBottomMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.MineBottomMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.MineBottomMaterial.setShininess(10.0);
-        this.MineBottomMaterial.loadTexture('images/mineBottom.png.png');
+        this.MineBottomMaterial.loadTexture('images/mineBottom.png');
         this.MineBottomMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
     display(scene) {
