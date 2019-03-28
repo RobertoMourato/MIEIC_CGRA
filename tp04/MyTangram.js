@@ -7,7 +7,7 @@ class MyTangram extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.diamond = new MyDiamond(scene, [0.25, 0.26, 0.49, 0.5, 0.25, 0.74, 0.01, 0.5]);
+        this.diamond = new MyDiamond(scene);
         this.TriRet = new TriRet(scene);
         this.Paralelogramo = new Paralelogramo(scene);
         this.TriRetP = new TriRetP(scene);
@@ -54,6 +54,14 @@ class MyTangram extends CGFobject {
         this.pink.setDiffuse(255 / 400, 125 / 400, 199 / 400, 1.0);
         this.pink.setSpecular(255 / 255, 125 / 255, 199 / 255, 0.5);
         this.pink.setShininess(10.0);
+
+        this.tangramMaterial = new CGFappearance(this.scene);
+        this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tangramMaterial.setShininess(10.0);
+        this.tangramMaterial.loadTexture('images/tangram.png');
+        this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
     }
     display(scene) {
@@ -118,10 +126,10 @@ class MyTangram extends CGFobject {
         this.scene.multMatrix(tr);
         this.scene.multMatrix(rot);
         //this.green.apply();
-        this.scene.Material.apply();
+        //this.scene.tangramMaterial.setTexture(this.scene.texture4);
+        this.tangramMaterial.apply();
         this.diamond.display();
         this.scene.popMatrix();
-
 
 
         this.scene.pushMatrix();

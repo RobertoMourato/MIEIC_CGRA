@@ -24,7 +24,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
-        this.tangram = new MyTangram(this);
+        this.tangram = new MyTangram(this); 
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -43,18 +43,10 @@ class MyScene extends CGFscene {
         this.texture4 = new CGFtexture(this, 'images/tangram.png');
         //-------
 
-        this.Material = new CGFappearance(this);
-        this.Material.setAmbient(0.1, 0.1, 0.1, 1);
-        this.Material.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.Material.setSpecular(0.1, 0.1, 0.1, 1);
-        this.Material.setShininess(10.0);
-        this.Material.setTextureWrap(this.texture4);
-
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayQuad = false;
-        this.displayTangram = false;
-        this.scaleFactor = 5;
+        this.scaleFactor = 1;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
@@ -124,22 +116,12 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        var sc = [0.3, 0.0, 0.0, 0.0,
-            0.0, 0.3, 0.0, 0.0,
-            0.0, 0.0, 0.3, 0.0,
-            0.0, 0.0, 0.0, 1.0];
-
         if (this.displayQuad) {
             this.quadMaterial.apply();
             this.quad.display();
         }
 
-        if (this.displayTangram) {
-            this.pushMatrix();
-            this.multMatrix(sc);
-            this.tangram.display();
-            this.popMatrix();
-        }
+        this.tangram.display();
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
