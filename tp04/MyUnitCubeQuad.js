@@ -33,60 +33,47 @@ class MyUnitCubeQuad extends CGFobject {
         this.MineBottomMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
     display(scene) {
-        var sc1 = [0.5, 0.0, 0.0, 0.0,
-            0.0, 0.5, 0.0, 0.0,
-            0.0, 0.0, 0.5, 0.0,
-            0.0, 0.0, 0.0, 1.0];
-
-        var tr1 = [1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.5, 1.0];
-
-        //1
-        this.MineSideMaterial.apply();
-        this.scene.pushMatrix();
-        this.scene.multMatrix(sc1);
-        this.scene.pushMatrix();
-        this.scene.multMatrix(tr1);
-        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        this.quad.display();
-        this.scene.popMatrix();
 
         //2
         this.scene.pushMatrix();
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.MineSideMaterial.apply();
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 0, 1, 0);
+        this.MineSideMaterial.apply();
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 0.5);
+        this.MineSideMaterial.apply();
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(Math.PI, 0, 1, 0);
+        this.MineSideMaterial.apply();
         this.quad.display();
-        this.MineTopMaterial.apply();
-        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(0, 0.5, 0);
-        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-        this.quad.display();
-        this.MineBottomMaterial.apply();
-        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
-        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.MineBottomMaterial.apply();
         this.quad.display();
         this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0.5, 0);
+        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+        this.MineTopMaterial.apply();
+        this.quad.display();
         this.scene.popMatrix();
     }
 }

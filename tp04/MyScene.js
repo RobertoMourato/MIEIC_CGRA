@@ -49,7 +49,7 @@ class MyScene extends CGFscene {
         this.displayQuad = false;
         this.displayTangram = false;
         this.displayCube = true;
-        this.scaleFactor = 1;
+        this.scaleFactor = 3;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
