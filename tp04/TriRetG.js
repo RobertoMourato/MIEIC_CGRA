@@ -4,8 +4,9 @@
  * @param scene - Reference to MyScene object
  */
 class TriRetG extends CGFobject {
-    constructor(scene) {
+    constructor(scene, coords) {
         super(scene);
+        this.texCoords = coords;
         this.initBuffers();
     }
     initBuffers() {
@@ -31,6 +32,7 @@ class TriRetG extends CGFobject {
             0, 0, -1,
             0, 0, -1
         ];
+
 
         var aux = this.indices.slice(0);
 

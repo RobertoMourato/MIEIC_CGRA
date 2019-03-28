@@ -11,7 +11,15 @@ class MyTangram extends CGFobject {
         this.TriRet = new TriRet(scene);
         this.Paralelogramo = new Paralelogramo(scene);
         this.TriRetP = new TriRetP(scene);
-        this.TriRetG = new TriRetG(scene);
+        this.TriRetG1 = new TriRetG(scene, [
+            1, 0,
+            0.5, 0.5,
+            0, 0,
+            1, 0,
+            0.5, 0.5,
+            0, 0,
+        ]);
+        this.TriRetG2 = new TriRetG(scene);
 
         this.red = new CGFappearance(scene);
         this.red.setAmbient(255/255, 0/255, 0/255, 1.0);
@@ -158,13 +166,14 @@ class MyTangram extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rot);
-        this.orange.apply();
-        this.TriRetG.display();
+        //this.orange.apply();
+        this.tangramMaterial.apply();
+        this.TriRetG1.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
         this.scene.multMatrix(rot1);
         this.blue.apply();
-        this.TriRetG.display();
+        this.TriRetG2.display();
         this.scene.popMatrix();
 
     }
