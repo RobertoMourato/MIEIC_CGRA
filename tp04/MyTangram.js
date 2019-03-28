@@ -7,7 +7,7 @@ class MyTangram extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.diamond = new MyDiamond(scene);
+        this.diamond = new MyDiamond(scene, [0.25, 0.26, 0.49, 0.5, 0.25, 0.74, 0.01, 0.5]);
         this.TriRet = new TriRet(scene);
         this.Paralelogramo = new Paralelogramo(scene);
         this.TriRetP = new TriRetP(scene);
@@ -118,7 +118,7 @@ class MyTangram extends CGFobject {
         this.scene.multMatrix(tr);
         this.scene.multMatrix(rot);
         //this.green.apply();
-        this.scene.customMaterial.apply();
+        this.scene.Material.apply();
         this.diamond.display();
         this.scene.popMatrix();
 
