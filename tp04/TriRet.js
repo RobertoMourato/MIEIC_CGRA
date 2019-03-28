@@ -32,6 +32,15 @@ class TriRet extends CGFobject {
             0, 0, -1
         ];
 
+        this.texCoords = [
+            0, 0.5,
+            0, 1,
+            0.5, 1,
+            0, 0.5,
+            0, 1,
+            0.5, 1
+        ];
+
         var aux = this.indices.slice(0);
 
         aux.reverse();

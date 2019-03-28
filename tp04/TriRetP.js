@@ -4,8 +4,9 @@
  * @param scene - Reference to MyScene object
  */
 class TriRetP extends CGFobject {
-    constructor(scene) {
+    constructor(scene, coords) {
         super(scene);
+        this.texCoords = coords;
         this.initBuffers();
     }
     initBuffers() {

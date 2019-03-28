@@ -37,6 +37,17 @@ class MyDiamond extends CGFobject {
             0, 0, -1
         ];
 
+        this.texCoords = [
+            0.25, 0.25,
+            0, 0.5,
+            0.5, 0.5,
+            0.25, 0.75,
+            0.25, 0.25,
+            0, 0.5,
+            0.5, 0.5,
+            0.25, 0.75
+        ];
+
         var aux = this.indices.slice(0);
 
         aux.reverse();

@@ -10,16 +10,10 @@ class MyTangram extends CGFobject {
         this.diamond = new MyDiamond(scene);
         this.TriRet = new TriRet(scene);
         this.Paralelogramo = new Paralelogramo(scene);
-        this.TriRetP = new TriRetP(scene);
-        this.TriRetG1 = new TriRetG(scene, [
-            1, 0,
-            0.5, 0.5,
-            0, 0,
-            1, 0,
-            0.5, 0.5,
-            0, 0,
-        ]);
-        this.TriRetG2 = new TriRetG(scene);
+        this.TriRetP1 = new TriRetP(scene, [0.25, 0.75, 0.5, 0.5, 0.75, 0.75, 0.25, 0.75, 0.5, 0.5, 0.75, 0.75]);
+        this.TriRetP2 = new TriRetP(scene, [0, 0, 0.25, 0.25, 0, 0.5, 0, 0, 0.25, 0.25, 0, 0.5]);
+        this.TriRetG1 = new TriRetG(scene, [1, 0, 0.5, 0.5, 0, 0, 1, 0, 0.5, 0.5, 0, 0]);
+        this.TriRetG2 = new TriRetG(scene, [1, 0, 0.5, 0.5, 1, 1, 1, 0, 0.5, 0.5, 1, 1]);
 
         this.red = new CGFappearance(scene);
         this.red.setAmbient(255/255, 0/255, 0/255, 1.0);
@@ -126,15 +120,13 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(tr4);
         this.scene.multMatrix(rot3);
-        this.pink.apply();
+        this.tangramMaterial.apply();
         this.TriRet.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.multMatrix(tr);
         this.scene.multMatrix(rot);
-        //this.green.apply();
-        //this.scene.tangramMaterial.setTexture(this.scene.texture4);
         this.tangramMaterial.apply();
         this.diamond.display();
         this.scene.popMatrix();
@@ -144,35 +136,36 @@ class MyTangram extends CGFobject {
         this.scene.multMatrix(tr3)
         this.scene.multMatrix(sc);
         this.scene.multMatrix(rot2);
-        this.yellow.apply();
+        this.tangramMaterial.apply();
         this.Paralelogramo.display();
         this.scene.popMatrix();
 
 
-
         this.scene.pushMatrix();
-        this.purple.apply();
-        this.scene.multMatrix(tr1)
-        this.TriRetP.display();
+        this.scene.multMatrix(tr1);
+        this.tangramMaterial.apply();
+        this.TriRetP1.display();
         this.scene.popMatrix();
+
+
         this.scene.pushMatrix();
         this.scene.multMatrix(tr2);
         this.scene.multMatrix(rot1)
-        this.red.apply();
-        this.TriRetP.display();
+        this.tangramMaterial.apply();
+        this.TriRetP2.display();
         this.scene.popMatrix()
-
 
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rot);
-        //this.orange.apply();
         this.tangramMaterial.apply();
         this.TriRetG1.display();
         this.scene.popMatrix();
+
+
         this.scene.pushMatrix();
         this.scene.multMatrix(rot1);
-        this.blue.apply();
+        this.tangramMaterial.apply();
         this.TriRetG2.display();
         this.scene.popMatrix();
 
