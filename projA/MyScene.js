@@ -6,6 +6,7 @@ class MyScene extends CGFscene {
     constructor() {
         super();
     }
+
     init(application) {
         super.init(application);
         this.initCameras();
@@ -22,24 +23,34 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 1);
+
         //Objects connected to MyInterface
         this.displayPrism = true;
+        this.objectComplexity = 0.5;
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+    updateObjectComplexity(){
+        this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene

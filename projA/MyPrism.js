@@ -55,8 +55,8 @@ class MyPrism extends CGFobject {
             this.normals.push(...normal);
             this.normals.push(...normal);
 
-            this.indices.push(3*i, (3*i+1) , (3*i+2));
-            this.indices.push((3*i+1), (3*i+3) , (3*i+2));
+            this.indices.push((4*i+2), 4*i, (4*i+1));
+            this.indices.push((4*i+2), (4*i+1) , (4*i+3));
 
             ang+=alphaAng;
         }

@@ -16,6 +16,8 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
+        this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).name('Object Complexity').onChange(this.scene.updateObjectComplexity.bind(this.scene));
+
         return true;
     }
 }
