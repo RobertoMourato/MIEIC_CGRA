@@ -23,9 +23,11 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 1);
+        this.cylinder = new MyCylinder(this, 3, 1);
 
         //Objects connected to MyInterface
-        this.displayPrism = true;
+        this.displayPrism = false;
+        this.displayCylinder = true;
         this.objectComplexity = 0.5;
     }
 
@@ -71,6 +73,9 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         if(this.displayPrism) {
             this.prism.display();
+        }
+        if(this.displayCylinder) {
+            this.cylinder.display();
         }
 
         // ---- END Primitive drawing section

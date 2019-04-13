@@ -1,5 +1,5 @@
 /**
- * MyTangram
+ * MyUnitCubeQuad
  * @constructor
  * @param scene - Reference to MyScene object
  */

@@ -1,5 +1,5 @@
 /**
-* MyPyramid
+* MyPrism
 * @constructor
 */
 class MyPrism extends CGFobject {
@@ -13,6 +13,7 @@ class MyPrism extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;

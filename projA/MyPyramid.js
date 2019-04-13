@@ -53,7 +53,7 @@ class MyPyramid extends CGFobject {
             this.normals.push(...normal);
             this.normals.push(...normal);
 
-            this.indices.push(3*i, (3*i+1) , (3*i+2) );
+            this.indices.push(3*i, (3*i+1) , (3*i+2));
 
             ang+=alphaAng;
         }
