@@ -20,22 +20,39 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
+        //Textures
+        this.trunkTexture = new CGFappearance(this);
+        this.trunkTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.trunkTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.trunkTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.trunkTexture.setShininess(10.0);
+        this.trunkTexture.loadTexture('images/TrunkTexture.jpg');
+        this.trunkTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.treeTopTexture = new CGFappearance(this);
+        this.treeTopTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.treeTopTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.treeTopTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.treeTopTexture.setShininess(10.0);
+        this.treeTopTexture.loadTexture('images/TreeTopTexture.jpg');
+        this.treeTopTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 1);
         this.cylinder = new MyCylinder(this, 3, 1);
-        this.tree = new MyTree(this, 1.3, 0.5, 1.8, 0.8);
-        this.treeRow = new MyTreeRowPatch(this);
-        this.treeGroup = new MyTreeGroupPatch(this);
+        this.tree = new MyTree(this, 1.3, 0.5, 1.8, 0.8, this.trunkTexture, this.treeTopTexture);
+        this.treeRow = new MyTreeRowPatch(this, this.trunkTexture, this.treeTopTexture);
+        this.treeGroup = new MyTreeGroupPatch(this, this.trunkTexture, this.treeTopTexture);
         this.house = new MyHouse(this);
 
         //Objects connected to MyInterface
         this.displayPrism = false;
         this.displayCylinder = false;
-        this.displayTree = false;
+        this.displayTree = true;
         this.displayTreeRow = false;
         this.displayTreeGroup = false;
-        this.displayhouse =  true;
+        this.displayHouse =  false;
         this.objectComplexity = 0.5;
     }
 
@@ -94,7 +111,7 @@ class MyScene extends CGFscene {
         if(this.displayTreeGroup) {
             this.treeGroup.display();
         }
-        if(this.displayhouse){
+        if(this.displayHouse){
             this.house.display();
         }
 
