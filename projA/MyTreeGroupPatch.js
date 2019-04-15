@@ -2,29 +2,59 @@
 * MyTreeGroupPatch
 * @constructor
 */
-class MyTree extends CGFobject {
-    constructor(scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius/*, trunkTexture, treeTopTexture*/) {
+class MyTreeGroupPatch extends CGFobject {
+    constructor(scene) {
         super(scene);
-        this.cylinder = new MyCylinder(scene, 8, 1); //Should have between 5 and 10 sides
-        this.cone = new MyCone(scene, 8, 1); //Should have between 5 and 10 sides
-        this.trunkHeight = trunkHeight;
-        this.trunkRadius = trunkRadius;
-        this.treeTopHeight = treeTopHeight;
-        this.treeTopRadius = treeTopRadius;
-        //this.trunkTex = trunkTexture;
-        //this.treeTopTex = treeTopTexture;
+        this.tree1 = new MyTree(scene, 1.3, 0.5, 1.8, 0.8);
+        this.tree2 = new MyTree(scene, 1.5, 0.5, 1.7, 1);
+        this.tree3 = new MyTree(scene, 1.4, 0.6, 1.8, 0.9);
+        this.tree4 = new MyTree(scene, 1.5, 0.6, 1.9, 1);
+        this.tree5 = new MyTree(scene, 1.4, 0.5, 1.8, 0.9);
     }
     
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(this.trunkRadius, this.trunkHeight, this.trunkRadius);
-        this.cylinder.display();
+        this.scene.translate(-2.1, 0, -2.2);
+        this.tree1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0, this.trunkHeight, 0);
-        this.scene.scale(this.treeTopRadius, this.treeTopHeight, this.treeTopRadius);
-        this.cone.display();
+        this.scene.translate(0, 0, -2.2); 
+        this.tree2.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(2.1, 0, -2.2);
+        this.tree3.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-2.1, 0, 0);
+        this.tree4.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.tree5.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(2.1, 0, 0);
+        this.tree4.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-2.1, 0, 2.2);
+        this.tree3.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 2.2);
+        this.tree2.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(2.1, 0, 2.2);
+        this.tree1.display();
         this.scene.popMatrix();
     }
 }
