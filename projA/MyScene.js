@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.treeRow = new MyTreeRowPatch(this);
         this.treeGroup = new MyTreeGroupPatch(this);
         this.house = new MyHouse(this);
+        this.hill = new MyVoxelHill(this, 4);
 
         //Objects connected to MyInterface
         this.displayPrism = false;
@@ -35,7 +36,8 @@ class MyScene extends CGFscene {
         this.displayTree = false;
         this.displayTreeRow = false;
         this.displayTreeGroup = false;
-        this.displayhouse =  true;
+        this.displayhouse =  false;
+        this.displayhill = true;
         this.objectComplexity = 0.5;
     }
 
@@ -96,6 +98,9 @@ class MyScene extends CGFscene {
         }
         if(this.displayhouse){
             this.house.display();
+        }
+        if(this.displayhill){
+            this.hill.display();
         }
 
         // ---- END Primitive drawing section
