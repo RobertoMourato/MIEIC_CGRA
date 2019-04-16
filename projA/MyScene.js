@@ -19,6 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.enableTextures(true);
 
         //Textures
         this.trunkTexture = new CGFappearance(this);
@@ -50,15 +51,11 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayPrism = false;
         this.displayCylinder = false;
-        this.displayTree = true;
+        this.displayTree = false;
         this.displayTreeRow = false;
-        this.displayTreeGroup = false;
-<<<<<<< HEAD
+        this.displayTreeGroup = true;
         this.displayHouse =  false;
-=======
-        this.displayhouse =  false;
-        this.displayhill = true;
->>>>>>> master
+        this.displayHill = false;
         this.objectComplexity = 0.5;
     }
 
@@ -120,7 +117,7 @@ class MyScene extends CGFscene {
         if(this.displayHouse){
             this.house.display();
         }
-        if(this.displayhill){
+        if(this.displayHill){
             this.hill.display();
         }
 
