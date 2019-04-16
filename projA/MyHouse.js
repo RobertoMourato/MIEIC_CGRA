@@ -6,11 +6,27 @@ class MyHouse extends CGFobject {
     constructor(scene) {
         super(scene);
         this.cube= new MyUnitCubeQuad(scene, 1);
-        this.pyramid= new MyPyramid(scene, 4, 8);
-        this.prism= new MyPrism(scene, 9, 8);
+        this.pyramid= new MyPyramid(scene, 4, 1);
+        this.prism= new MyPrism(scene, 9, 1);
+
+        this.roofTexture = new CGFappearance(this.scene);
+        this.roofTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.roofTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roofTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roofTexture.setShininess(10.0);
+        this.roofTexture.loadTexture('images/roofTexture.jpg');
+        this.roofTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.columnTexture = new CGFappearance(this.scene);
+        this.columnTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.columnTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.columnTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.columnTexture.setShininess(10.0);
+        this.columnTexture.loadTexture('images/columnTexture.jpg');
+        this.columnTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
     
-    display() {
+    display(scene) {
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
@@ -21,14 +37,14 @@ class MyHouse extends CGFobject {
         this.scene.rotate(Math.PI/4, 0, 1, 0);
         this.scene.translate(0, 1, 0);
         this.scene.scale(1.4, 1.4, 1.4);
-        this.scene.roofTexture.apply();
+        this.roofTexture.apply();
         this.pyramid.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.73, 0, 0.73);
         this.scene.scale(0.2, 1, 0.2);
-        this.scene.columnTexture.apply();
+        this.columnTexture.apply();
         this.prism.display();
         this.scene.popMatrix();
 
