@@ -5,7 +5,7 @@
 class MyVoxelHill extends CGFobject {
     constructor(scene, levels) {
         super(scene);
-        this.cube = new MyUnitCubeQuad(scene);
+        this.cube = new MyUnitCubeQuad(scene, 0);
         this.levels = levels;
         this.aux=0;
     }

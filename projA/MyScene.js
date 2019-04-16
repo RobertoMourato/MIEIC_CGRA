@@ -38,6 +38,22 @@ class MyScene extends CGFscene {
         this.treeTopTexture.loadTexture('images/TreeTopTexture.jpg');
         this.treeTopTexture.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.roofTexture = new CGFappearance(this);
+        this.roofTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.roofTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roofTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roofTexture.setShininess(10.0);
+        this.roofTexture.loadTexture('images/roofTexture.jpg');
+        this.roofTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.columnTexture = new CGFappearance(this);
+        this.columnTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.columnTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.columnTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.columnTexture.setShininess(10.0);
+        this.columnTexture.loadTexture('images/columnTexture.jpg');
+        this.columnTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 1);
@@ -53,8 +69,8 @@ class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displayTree = false;
         this.displayTreeRow = false;
-        this.displayTreeGroup = true;
-        this.displayHouse =  false;
+        this.displayTreeGroup = false;
+        this.displayHouse =  true;
         this.displayHill = false;
         this.objectComplexity = 0.5;
     }
