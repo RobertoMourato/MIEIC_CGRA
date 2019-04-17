@@ -53,8 +53,9 @@ class MyScene extends CGFscene {
         this.cubeMap.setDiffuse(1, 1, 1, 1);
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
-        this.cubeMap.loadTexture('images/cubeMap.jpg');
-        this.cubeMap.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.day = new CGFtexture(this,'images/dayMap.png');
+        this.night = new CGFtexture(this,'images/nightMap.png');
 
         this.riverTexture = new CGFappearance(this);    //Specular material
         this.riverTexture.setAmbient(220/255, 220/255, 220/255, 1);
@@ -77,6 +78,8 @@ class MyScene extends CGFscene {
         this.river = new MyUnitCubeQuad(this, 2);
 
         //Objects connected to MyInterface
+        this.displayTextures = true;
+        this.DayMode_NightMode = true;
         this.displayGround = true;
         this.displayHouse =  true;
         this.displayTreeRow = true;
@@ -89,10 +92,23 @@ class MyScene extends CGFscene {
     }
 
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
+
+        this.lights[0].setPosition(0, 100, 0, 1);
+        this.lights[0].setAmbient(240/255, 178/255, 4/255, 1.0);
+        this.lights[0].setDiffuse(240/255, 178/255, 4/255, 1.0);
+        this.lights[0].setSpecular(240/255, 178/255, 4/255, 1.0); 
+        this.lights[0].setLinearAttenuation(0.02);
         this.lights[0].enable();
         this.lights[0].update();
+
+        this.lights[1].setPosition(0, 50, 0, 1);
+        this.lights[1].setAmbient(22/255, 98/255, 132/255, 1.0);
+        this.lights[1].setDiffuse(22/255, 98/255, 132/255, 1.0);
+        this.lights[1].setSpecular(22/255, 98/255, 132/255, 1.0);
+        this.lights[1].setLinearAttenuation(0.2);
+        this.lights[1].disable();
+        this.lights[1].update();
     }
 
     initCameras() {
@@ -106,8 +122,28 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    updateObjectComplexity(){
-        this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    SetDayTime(){
+        if(this.DayMode_NightMode){
+            this.cubeMap.setTexture(this.day);
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[0].update();
+            this.lights[1].update();
+        }else{
+            this.cubeMap.setTexture(this.night);
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[0].update();
+            this.lights[1].update();
+        }
+    }
+
+    SetTextures(){
+        if(this.displayTextures){
+            this.enableTextures(true);
+        }else{
+            this.enableTextures(false);
+        }
     }
 
     display() {
@@ -122,7 +158,8 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
+        this.SetDayTime();
 
         //Apply default appearance  
         this.setDefaultAppearance();

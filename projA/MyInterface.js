@@ -16,8 +16,8 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
-        this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).name('Object Complexity').onChange(this.scene.updateObjectComplexity.bind(this.scene));
-
+        this.gui.add(this.scene,'displayTextures').name('Display Textures').onChange(this.scene.SetTextures.bind(this.scene));
+        this.gui.add(this.scene,'DayMode_NightMode').name('Time Mode').onChange(this.scene.SetDayTime.bind(this.scene));
         return true;
     }
 }
