@@ -71,6 +71,34 @@ class MyUnitCubeQuad extends CGFobject {
             this.quad.display();
             this.scene.popMatrix();
         }
+        else if(this.index == 3) {
+            this.scene.pushMatrix();
+            this.scene.translate(0.5, 0, 0);
+            this.scene.rotate(Math.PI / 2, 0, 1, 0);
+            this.scene.fireTexture.apply();
+            this.quad.display();
+            this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+            this.scene.translate(-0.5, 0, 0);
+            this.scene.rotate(-Math.PI / 2, 0, 1, 0);
+            this.wallTexture.apply();
+            this.quad.display();
+            this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, 0.5);
+            this.wallTexture.apply();
+            this.quad.display();
+            this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0, -0.5);
+            this.scene.rotate(Math.PI, 0, 1, 0);
+            this.wallTexture.apply();
+            this.quad.display();
+            this.scene.popMatrix();
+        }
         else {
             this.scene.pushMatrix();
             this.scene.translate(0.5, 0, 0);
@@ -112,6 +140,14 @@ class MyUnitCubeQuad extends CGFobject {
             this.scene.translate(0, 0.5, 0);
             this.scene.rotate(-Math.PI / 2, 1, 0, 0);
             this.scene.riverTexture.apply();
+            this.quad.display();
+            this.scene.popMatrix();
+        }
+        else if(this.index == 3) {
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0.5, 0);
+            this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+            this.wallTexture.apply();
             this.quad.display();
             this.scene.popMatrix();
         }

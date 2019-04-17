@@ -18,6 +18,7 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene,'displayTextures').name('Display Textures').onChange(this.scene.SetTextures.bind(this.scene));
         this.gui.add(this.scene,'DayMode_NightMode').name('Time Mode').onChange(this.scene.SetDayTime.bind(this.scene));
+        this.gui.add(this.scene.lights[2], 'enabled').name('Enable Fire');
         return true;
     }
 }
