@@ -21,6 +21,8 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.TRILINEAR);
+
         //Textures
         this.trunkTexture = new CGFappearance(this);
         this.trunkTexture.setAmbient(0.1, 0.1, 0.1, 1);

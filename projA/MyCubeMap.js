@@ -150,7 +150,6 @@ class MyCubeMap extends CGFobject {
 			0.5,0.66,
             0.25,0.66//bottom
         ]
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
