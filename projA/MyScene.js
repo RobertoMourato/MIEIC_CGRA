@@ -24,9 +24,9 @@ class MyScene extends CGFscene {
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.TRILINEAR);
 
         //Textures
-        this.trunkTexture = new CGFappearance(this);
-        this.trunkTexture.setAmbient(122/255,58/255,6/255,1.0);
-        this.trunkTexture.setDiffuse(122/255,58/255,6/255,1.0);
+        this.trunkTexture = new CGFappearance(this);    //Diffuse material
+        this.trunkTexture.setAmbient(122/255, 58/255, 6/255, 1);
+        this.trunkTexture.setDiffuse(122/255, 58/255, 6/255, 1);
         this.trunkTexture.setSpecular(0, 0, 0, 1);
         this.trunkTexture.setShininess(10.0);
         this.trunkTexture.loadTexture('images/TrunkTexture.jpg');
@@ -56,6 +56,14 @@ class MyScene extends CGFscene {
         this.cubeMap.loadTexture('images/cubeMap.jpg');
         this.cubeMap.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.riverTexture = new CGFappearance(this);    //Specular material
+        this.riverTexture.setAmbient(220/255, 220/255, 220/255, 1);
+        this.riverTexture.setDiffuse(1, 1, 1, 1);
+        this.riverTexture.setSpecular(220/255, 220/255, 220/255, 1);
+        this.riverTexture.setShininess(10.0);
+        this.riverTexture.loadTexture('images/riverTexture.jpg');
+        this.riverTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.ground = new MyQuad(this);
@@ -66,6 +74,7 @@ class MyScene extends CGFscene {
         this.hill1 = new MyVoxelHill(this, 4);
         this.hill2 = new MyVoxelHill(this, 5);
         this.map = new MyCubeMap(this);
+        this.river = new MyUnitCubeQuad(this, 2);
 
         //Objects connected to MyInterface
         this.displayGround = true;
@@ -75,6 +84,7 @@ class MyScene extends CGFscene {
         this.displayHill1 =  true;
         this.displayHill2 = true;
         this.displayMyCubeMap = true;
+        this.displayRiver = true;
         this.objectComplexity = 0.5;
     }
 
@@ -191,6 +201,32 @@ class MyScene extends CGFscene {
             this.translate(28, 0, 34);
             this.scale(3, 3, 3);
             this.hill2.display();
+            this.popMatrix();
+        }
+
+        if(this.displayRiver){
+            this.pushMatrix();
+            this.translate(-28, -1.45, -17);
+            this.scale(1, 1, 22);
+            this.scale(3, 3, 3);
+            this.riverTexture.apply();
+            this.river.display();
+            this.popMatrix();
+
+            this.pushMatrix();
+            this.translate(-35.5, -1.45, 17.5);
+            this.scale(6, 1, 1);
+            this.scale(3, 3, 3);
+            this.riverTexture.apply();
+            this.river.display();
+            this.popMatrix();
+
+            this.pushMatrix();
+            this.translate(-46, -1.45, 33);
+            this.scale(1, 1, 11.3);
+            this.scale(3, 3, 3);
+            this.riverTexture.apply();
+            this.river.display();
             this.popMatrix();
         }
 
