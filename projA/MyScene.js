@@ -48,13 +48,13 @@ class MyScene extends CGFscene {
         this.grassTexture.loadTexture('images/grassTexture.jpg');
         this.grassTexture.setTextureWrap('REPEAT', 'REPEAT');
         
-        this.cubeMapMaterial = new CGFappearance(this);
-        this.cubeMapMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cubeMapMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.cubeMapMaterial.setShininess(10.0);
-        this.cubeMapMaterial.loadTexture('images/cubeMap.jpg');
-        this.cubeMapMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.cubeMap = new CGFappearance(this);
+        this.cubeMap.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMap.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMap.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMap.setShininess(10.0);
+        this.cubeMap.loadTexture('images/cubeMap.jpg');
+        this.cubeMap.setTextureWrap('REPEAT', 'REPEAT');
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -86,7 +86,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 15, 0));
+        this.camera = new CGFcamera(0.4, 10, 500, vec3.fromValues(80, 50, -120), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -119,18 +119,29 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        if(this.displayMyCubeMap){
+            this.pushMatrix();
+            this.translate(0.5, 0.5, 0.5);
+            this.scale(100, 100, 100);
+            this.translate(0, 0.485, 0);
+            this.cubeMap.apply();
+            this.map.display();
+            this.popMatrix();
+        }
+
         if(this.displayGround){
             this.pushMatrix();
-            this.rotate(Math.PI/4, 0, 1, 0);
+            //this.rotate(Math.PI/4, 0, 1, 0);
             this.rotate((3*Math.PI)/2, 1, 0, 0);
-            this.scale(40, 40, 0);
+            this.scale(100, 100, 1);
             this.grassTexture.apply();
             this.ground.display();
             this.popMatrix();
         }
-
+/*
         if(this.displayHouse){
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.scale(1.2, 1.2, 1.2);
             this.rotate(Math.PI/4, 0, 1, 0);
             this.house.display();
@@ -139,12 +150,14 @@ class MyScene extends CGFscene {
 
         if(this.displayTreeRow) {
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(0, 0, -5);
             this.treeRow.display();
             this.popMatrix();
 
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(0, 0, 5);
             this.treeRow.display();
@@ -153,12 +166,14 @@ class MyScene extends CGFscene {
 
         if(this.displayTreeGroup) {
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(-9, 0, 0);
             this.treeGroup.display();
             this.popMatrix();
 
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(-15, 0, 0);
             this.treeGroup.display();
@@ -167,6 +182,7 @@ class MyScene extends CGFscene {
 
         if(this.displayHill1){
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(-10, -0.5, -10);
             this.hill1.display();
@@ -175,20 +191,12 @@ class MyScene extends CGFscene {
 
         if(this.displayHill2){
             this.pushMatrix();
+            this.translate(0, 0.5, 0);
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(-11, -0.5, 10);
             this.hill2.display();
             this.popMatrix();
-        }
-
-        if(this.displayMyCubeMap){
-            this.pushMatrix();
-            this.translate(0,70*0.5,0);
-            this.scale(70, 70, 70);
-            this.cubeMapMaterial.apply();
-            this.map.display();
-            this.popMatrix();
-        }
+        }*/
 
         // ---- END Primitive drawing section
     }
