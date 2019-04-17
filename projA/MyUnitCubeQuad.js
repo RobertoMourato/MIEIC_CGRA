@@ -10,33 +10,33 @@ class MyUnitCubeQuad extends CGFobject {
         this.index = index;
 
         this.MineSideMaterial = new CGFappearance(this.scene);
-        this.MineSideMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.MineSideMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.MineSideMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.MineSideMaterial.setAmbient(0.3, 0.3, 0.3, 1);
+        this.MineSideMaterial.setDiffuse(1, 1, 1, 1);
+        this.MineSideMaterial.setSpecular(1, 1, 1, 1);
         this.MineSideMaterial.setShininess(10.0);
         this.MineSideMaterial.loadTexture('images/mineSide.png');
         this.MineSideMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         this.MineTopMaterial = new CGFappearance(this.scene);
-        this.MineTopMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.MineTopMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.MineTopMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.MineTopMaterial.setAmbient(0.3, 0.3, 0.3, 1);
+        this.MineTopMaterial.setDiffuse(1, 1, 1, 1);
+        this.MineTopMaterial.setSpecular(1, 1, 1, 1);
         this.MineTopMaterial.setShininess(10.0);
         this.MineTopMaterial.loadTexture('images/mineTop.png');
         this.MineTopMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         this.MineBottomMaterial = new CGFappearance(this.scene);
-        this.MineBottomMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.MineBottomMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.MineBottomMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.MineBottomMaterial.setAmbient(0.3, 0.3, 0.3, 1);
+        this.MineBottomMaterial.setDiffuse(1, 1, 1, 1);
+        this.MineBottomMaterial.setSpecular(1, 1, 1, 1);
         this.MineBottomMaterial.setShininess(10.0);
         this.MineBottomMaterial.loadTexture('images/mineBottom.png');
         this.MineBottomMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         this.wallTexture = new CGFappearance(this.scene);
-        this.wallTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.wallTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.wallTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.wallTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.wallTexture.setDiffuse(1, 1, 1, 1);
+        this.wallTexture.setSpecular(1, 1, 1, 1);
         this.wallTexture.setShininess(10.0);
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');

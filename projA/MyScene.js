@@ -25,33 +25,33 @@ class MyScene extends CGFscene {
 
         //Textures
         this.trunkTexture = new CGFappearance(this);
-        this.trunkTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.trunkTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.trunkTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.trunkTexture.setAmbient(122/255,58/255,6/255,1.0);
+        this.trunkTexture.setDiffuse(122/255,58/255,6/255,1.0);
+        this.trunkTexture.setSpecular(0, 0, 0, 1);
         this.trunkTexture.setShininess(10.0);
         this.trunkTexture.loadTexture('images/TrunkTexture.jpg');
         this.trunkTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         this.treeTopTexture = new CGFappearance(this);
-        this.treeTopTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.treeTopTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.treeTopTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.treeTopTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.treeTopTexture.setDiffuse(1, 1, 1, 1);
+        this.treeTopTexture.setSpecular(1, 1, 1, 1);
         this.treeTopTexture.setShininess(10.0);
         this.treeTopTexture.loadTexture('images/TreeTopTexture.jpg');
         this.treeTopTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         this.grassTexture = new CGFappearance(this);
-        this.grassTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grassTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grassTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.grassTexture.setDiffuse(1, 1, 1, 1);
+        this.grassTexture.setSpecular(1, 1, 1, 1);
         this.grassTexture.setShininess(10.0);
         this.grassTexture.loadTexture('images/grassTexture.jpg');
         this.grassTexture.setTextureWrap('REPEAT', 'REPEAT');
         
         this.cubeMap = new CGFappearance(this);
-        this.cubeMap.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cubeMap.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cubeMap.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMap.setAmbient(0.6, 0.6, 0.6, 1);
+        this.cubeMap.setDiffuse(1, 1, 1, 1);
+        this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
         this.cubeMap.loadTexture('images/cubeMap.jpg');
         this.cubeMap.setTextureWrap('REPEAT', 'REPEAT');

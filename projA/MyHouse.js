@@ -10,17 +10,17 @@ class MyHouse extends CGFobject {
         this.prism= new MyPrism(scene, 9, 1);
 
         this.roofTexture = new CGFappearance(this.scene);
-        this.roofTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.roofTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.roofTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.roofTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.roofTexture.setDiffuse(1, 1, 1, 1);
+        this.roofTexture.setSpecular(1, 1, 1, 1);
         this.roofTexture.setShininess(10.0);
         this.roofTexture.loadTexture('images/roofTexture.jpg');
         this.roofTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         this.columnTexture = new CGFappearance(this.scene);
-        this.columnTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.columnTexture.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.columnTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.columnTexture.setAmbient(178/255,178/255,178/255, 1.0);
+        this.columnTexture.setDiffuse(178/255,178/255,178/255, 1.0);
+        this.columnTexture.setSpecular(0, 0, 0, 1);
         this.columnTexture.setShininess(10.0);
         this.columnTexture.loadTexture('images/columnTexture.jpg');
         this.columnTexture.setTextureWrap('REPEAT', 'REPEAT');
