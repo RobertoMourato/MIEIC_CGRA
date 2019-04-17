@@ -86,7 +86,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 10, 500, vec3.fromValues(0, 100, -120), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 10, 500, vec3.fromValues(0, 80, -120), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -131,72 +131,68 @@ class MyScene extends CGFscene {
 
         if(this.displayGround){
             this.pushMatrix();
-            //this.rotate(Math.PI/4, 0, 1, 0);
+            this.rotate(Math.PI, 0, 1, 0);
             this.rotate((3*Math.PI)/2, 1, 0, 0);
             this.scale(100, 100, 1);
             this.grassTexture.apply();
             this.ground.display();
             this.popMatrix();
         }
-/*
+
         if(this.displayHouse){
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.scale(1.2, 1.2, 1.2);
-            this.rotate(Math.PI/4, 0, 1, 0);
+            this.translate(0, 0, 0);
+            this.scale(5, 5, 5);
             this.house.display();
             this.popMatrix();
         }
 
         if(this.displayTreeRow) {
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(0, 0, -5);
+            this.translate(13, 0, 0);
+            this.rotate(Math.PI/2, 0, 1, 0);
+            this.scale(3, 3, 3);
             this.treeRow.display();
             this.popMatrix();
 
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(0, 0, 5);
+            this.translate(-13, 0, 0);
+            this.rotate(-Math.PI/2, 0, 1, 0);
+            this.scale(3, 3, 3);
             this.treeRow.display();
             this.popMatrix();
         }
 
         if(this.displayTreeGroup) {
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(-9, 0, 0);
+            this.translate(0, 0, 17);
+            this.scale(3, 3, 3);
             this.treeGroup.display();
             this.popMatrix();
 
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(-15, 0, 0);
+            this.translate(0, 0, 37);
+            this.rotate(Math.PI/2, 0, 1, 0);
+            this.scale(3, 3, 3);
             this.treeGroup.display();
             this.popMatrix();
         }
 
         if(this.displayHill1){
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(-10, -0.5, -10);
+            this.translate(-25, 0, 32);
+            this.scale(3, 3, 3);
             this.hill1.display();
             this.popMatrix();
         }
 
         if(this.displayHill2){
             this.pushMatrix();
-            this.translate(0, 0.5, 0);
-            this.rotate(-Math.PI/4, 0, 1, 0);
-            this.translate(-11, -0.5, 10);
+            this.translate(28, 0, 34);
+            this.scale(3, 3, 3);
             this.hill2.display();
             this.popMatrix();
-        }*/
+        }
 
         // ---- END Primitive drawing section
     }
