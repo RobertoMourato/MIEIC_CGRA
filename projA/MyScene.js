@@ -38,24 +38,31 @@ class MyScene extends CGFscene {
         this.treeTopTexture.loadTexture('images/TreeTopTexture.jpg');
         this.treeTopTexture.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.grassTexture = new CGFappearance(this);
+        this.grassTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassTexture.setShininess(10.0);
+        this.grassTexture.loadTexture('images/grassTexture.jpg');
+        this.grassTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.prism = new MyPrism(this, 3, 1);
-        this.cylinder = new MyCylinder(this, 3, 1);
-        this.tree = new MyTree(this, 1.3, 0.5, 1.8, 0.8, this.trunkTexture, this.treeTopTexture);
+        this.ground = new MyQuad(this);
+        this.house = new MyHouse(this);
         this.treeRow = new MyTreeRowPatch(this, this.trunkTexture, this.treeTopTexture);
         this.treeGroup = new MyTreeGroupPatch(this, this.trunkTexture, this.treeTopTexture);
         this.house = new MyHouse(this);
-        this.hill = new MyVoxelHill(this, 4);
+        this.hill1 = new MyVoxelHill(this, 4);
+        this.hill2 = new MyVoxelHill(this, 5);
 
         //Objects connected to MyInterface
-        this.displayPrism = false;
-        this.displayCylinder = false;
-        this.displayTree = false;
-        this.displayTreeRow = false;
-        this.displayTreeGroup = false;
+        this.displayGround = true;
         this.displayHouse =  true;
-        this.displayHill = false;
+        this.displayTreeRow = true;
+        this.displayTreeGroup = true;
+        this.displayHill1 =  true;
+        this.displayHill2 = true;
         this.objectComplexity = 0.5;
     }
 
@@ -99,26 +106,67 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        if(this.displayPrism) {
-            this.prism.display();
+
+        if(this.displayGround){
+            this.pushMatrix();
+            this.rotate(Math.PI/4, 0, 1, 0);
+            this.rotate((3*Math.PI)/2, 1, 0, 0);
+            this.scale(40, 40, 0);
+            this.grassTexture.apply();
+            this.ground.display();
+            this.popMatrix();
         }
-        if(this.displayCylinder) {
-            this.cylinder.display();
-        }
-        if(this.displayTree) {
-            this.tree.display();
-        }
-        if(this.displayTreeRow) {
-            this.treeRow.display();
-        }
-        if(this.displayTreeGroup) {
-            this.treeGroup.display();
-        }
+
         if(this.displayHouse){
+            this.pushMatrix();
+            this.scale(1.2, 1.2, 1.2);
+            this.rotate(Math.PI/4, 0, 1, 0);
             this.house.display();
+            this.popMatrix();
         }
-        if(this.displayHill){
-            this.hill.display();
+
+        if(this.displayTreeRow) {
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(0, 0, -5);
+            this.treeRow.display();
+            this.popMatrix();
+
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(0, 0, 5);
+            this.treeRow.display();
+            this.popMatrix();
+        }
+
+        if(this.displayTreeGroup) {
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(-9, 0, 0);
+            this.treeGroup.display();
+            this.popMatrix();
+
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(-15, 0, 0);
+            this.treeGroup.display();
+            this.popMatrix();
+        }
+
+        if(this.displayHill1){
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(-10, -0.5, -10);
+            this.hill1.display();
+            this.popMatrix();
+        }
+
+        if(this.displayHill2){
+            this.pushMatrix();
+            this.rotate(-Math.PI/4, 0, 1, 0);
+            this.translate(-11, -0.5, 10);
+            this.hill2.display();
+            this.popMatrix();
         }
 
         // ---- END Primitive drawing section
