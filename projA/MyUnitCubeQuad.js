@@ -7,7 +7,7 @@ class MyUnitCubeQuad extends CGFobject {
     constructor(scene, index) {
         super(scene);
         this.quad = new MyQuad(scene);
-        this.index = index;
+        this.index = index;             //0 for hills, 1 for house, 2 for river, 3 for fireplace
 
         this.MineSideMaterial = new CGFappearance(this.scene);
         this.MineSideMaterial.setAmbient(0.3, 0.3, 0.3, 1);
@@ -42,8 +42,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
     display(scene) {
-
-        if(this.index == 0) {
+        if(this.index == 0) {           //Cube for the hills
             this.scene.pushMatrix();
             this.scene.translate(0.5, 0, 0);
             this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -71,7 +70,7 @@ class MyUnitCubeQuad extends CGFobject {
             this.quad.display();
             this.scene.popMatrix();
         }
-        else if(this.index == 3) {
+        else if(this.index == 3) {      //Fireplace cube
             this.scene.pushMatrix();
             this.scene.translate(0.5, 0, 0);
             this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -99,7 +98,7 @@ class MyUnitCubeQuad extends CGFobject {
             this.quad.display();
             this.scene.popMatrix();
         }
-        else {
+        else {                          //House Cube
             this.scene.pushMatrix();
             this.scene.translate(0.5, 0, 0);
             this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -135,7 +134,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        if(this.index == 2) {
+        if(this.index == 2) {           //River cube
             this.scene.pushMatrix();
             this.scene.translate(0, 0.5, 0);
             this.scene.rotate(-Math.PI / 2, 1, 0, 0);
@@ -143,7 +142,7 @@ class MyUnitCubeQuad extends CGFobject {
             this.quad.display();
             this.scene.popMatrix();
         }
-        else if(this.index == 3) {
+        else if(this.index == 3) {      //Wall top for fireplace
             this.scene.pushMatrix();
             this.scene.translate(0, 0.5, 0);
             this.scene.rotate(-Math.PI / 2, 1, 0, 0);
@@ -151,7 +150,7 @@ class MyUnitCubeQuad extends CGFobject {
             this.quad.display();
             this.scene.popMatrix();
         }
-        else {
+        else {                          //Cube for the hills
             this.scene.pushMatrix();
             this.scene.translate(0, 0.5, 0);
             this.scene.rotate(-Math.PI / 2, 1, 0, 0);

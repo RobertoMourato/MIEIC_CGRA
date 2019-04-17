@@ -17,7 +17,7 @@ class MyHouse extends CGFobject {
         this.roofTexture.loadTexture('images/roofTexture.jpg');
         this.roofTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.columnTexture = new CGFappearance(this.scene); //Diffuse material
+        this.columnTexture = new CGFappearance(this.scene);         //Diffuse material
         this.columnTexture.setAmbient(178/255, 178/255, 178/255, 1);
         this.columnTexture.setDiffuse(178/255, 178/255, 178/255, 1);
         this.columnTexture.setSpecular(0, 0, 0, 1);

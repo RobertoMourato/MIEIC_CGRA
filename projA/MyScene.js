@@ -65,10 +65,10 @@ class MyScene extends CGFscene {
         this.riverTexture.loadTexture('images/riverTexture.jpg');
         this.riverTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.fireTexture = new CGFappearance(this);    //Specular material
-        this.fireTexture.setAmbient(220/255, 220/255, 220/255, 1);
+        this.fireTexture = new CGFappearance(this);    
+        this.fireTexture.setAmbient(0.3, 0.3, 0.3, 1);
         this.fireTexture.setDiffuse(1, 1, 1, 1);
-        this.fireTexture.setSpecular(220/255, 220/255, 220/255, 1);
+        this.fireTexture.setSpecular(1, 1, 1, 1);
         this.fireTexture.setShininess(10.0);
         this.fireTexture.loadTexture('images/firePitTexture.jpg');
         this.fireTexture.setTextureWrap('REPEAT', 'REPEAT');
@@ -90,17 +90,6 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayTextures = true;
         this.DayMode_NightMode = true;
-        this.displayGround = true;
-        this.displayHouse =  true;
-        this.displayTreeRow = true;
-        this.displayTreeGroup = true;
-        this.displayHill1 =  true;
-        this.displayHill2 = true;
-        this.displayHill3 = true;
-        this.displayMyCubeMap = true;
-        this.displayRiver = true;
-        this.displayFirePit = true;
-        this.objectComplexity = 0.5;
     }
 
     initLights() {
@@ -189,170 +178,158 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        if(this.displayMyCubeMap){
-            this.pushMatrix();
-            this.translate(0.5, 0.5, 0.5);
-            this.scale(100, 100, 100);
-            this.translate(0, 0.485, 0);
-            this.cubeMap.apply();
-            this.map.display();
-            this.popMatrix();
-        }
+        //Apllying cubemap
+        this.pushMatrix();
+        this.translate(0.5, 0.5, 0.5);
+        this.scale(100, 100, 100);
+        this.translate(0, 0.485, 0);
+        this.cubeMap.apply();
+        this.map.display();
+        this.popMatrix()
 
-        if(this.displayGround){
-            this.pushMatrix();
-            this.rotate(Math.PI, 0, 1, 0);
-            this.rotate((3*Math.PI)/2, 1, 0, 0);
-            this.scale(100, 100, 1);
-            this.grassTexture.apply();
-            this.ground.display();
-            this.popMatrix();
-        }
+        //Apllying the grass
+        this.pushMatrix();
+        this.rotate(Math.PI, 0, 1, 0);
+        this.rotate((3*Math.PI)/2, 1, 0, 0);
+        this.scale(100, 100, 1);
+        this.grassTexture.apply();
+        this.ground.display();
+        this.popMatrix();
 
-        if(this.displayHouse){
-            this.pushMatrix();
-            this.translate(0, 0, 0);
-            this.scale(5, 5, 5);
-            this.house.display();
-            this.popMatrix();
-        }
+        //Apllying the house
+        this.pushMatrix();
+        this.translate(0, 0, 0);
+        this.scale(5, 5, 5);
+        this.house.display();
+        this.popMatrix();
 
-        if(this.displayTreeRow) {
-            this.pushMatrix();
-            this.translate(13, 0, 0);
-            this.rotate(Math.PI/2, 0, 1, 0);
-            this.scale(3, 3, 3);
-            this.treeRow.display();
-            this.popMatrix();
+        //Apllying the Rows of trees
+        this.pushMatrix();
+        this.translate(13, 0, 0);
+        this.rotate(Math.PI/2, 0, 1, 0);
+        this.scale(3, 3, 3);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-13, 0, 0);
-            this.rotate(-Math.PI/2, 0, 1, 0);
-            this.scale(3, 3, 3);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(-13, 0, 0);
+        this.rotate(-Math.PI/2, 0, 1, 0);
+        this.scale(3, 3, 3);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-22, 0, 0);
-            this.rotate(Math.PI/2, 0, 1, 0);
-            this.scale(3, 3, 3);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(-22, 0, 0);
+        this.rotate(Math.PI/2, 0, 1, 0);
+        this.scale(3, 3, 3);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-40, 0, -15);
-            this.rotate(-Math.PI/2, 0, 1, 0);
-            this.scale(3, 3, 3);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(-40, 0, -15);
+        this.rotate(-Math.PI/2, 0, 1, 0);
+        this.scale(3, 3, 3);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(32, 0, -16);
-            this.scale(2.5, 2.5, 2.5);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(32, 0, -16);
+        this.scale(2.5, 2.5, 2.5);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(33, 0, 16);
-            this.scale(2.5, 2.5, 2.5);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(33, 0, 16);
+        this.scale(2.5, 2.5, 2.5);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(7, 0, -33);
-            this.rotate(-Math.PI/2.3, 0, 1, 0);
-            this.scale(2.5, 2.5, 2.5);
-            this.treeRow.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(7, 0, -33);
+        this.rotate(-Math.PI/2.3, 0, 1, 0);
+        this.scale(2.5, 2.5, 2.5);
+        this.treeRow.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-7, 0, -33);
-            this.rotate(Math.PI/2.3, 0, 1, 0);
-            this.scale(2.5, 2.5, 2.5);
-            this.treeRow.display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.translate(-7, 0, -33);
+        this.rotate(Math.PI/2.3, 0, 1, 0);
+        this.scale(2.5, 2.5, 2.5);
+        this.treeRow.display();
+        this.popMatrix();
 
-        if(this.displayTreeGroup) {
-            this.pushMatrix();
-            this.translate(0, 0, 17);
-            this.scale(3, 3, 3);
-            this.treeGroup.display();
-            this.popMatrix();
+        //Apllying the Groups of trees
+        this.pushMatrix();
+        this.translate(0, 0, 17);
+        this.scale(3, 3, 3);
+        this.treeGroup.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(0, 0, 37);
-            this.rotate(Math.PI/2, 0, 1, 0);
-            this.scale(3, 3, 3);
-            this.treeGroup.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(0, 0, 37);
+        this.rotate(Math.PI/2, 0, 1, 0);
+        this.scale(3, 3, 3);
+        this.treeGroup.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(33, 0, 0);
-            this.rotate(Math.PI/2, 0, 1, 0);
-            this.scale(4, 4, 4);
-            this.treeGroup.display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.translate(33, 0, 0);
+        this.rotate(Math.PI/2, 0, 1, 0);
+        this.scale(4, 4, 4);
+        this.treeGroup.display();
+        this.popMatrix();
 
-        if(this.displayHill1){
-            this.pushMatrix();
-            this.translate(-25, 0, 32);
-            this.scale(3, 3, 3);
-            this.hill1.display();
-            this.popMatrix();
-        }
+        //Apllying the Hills
+        this.pushMatrix();
+        this.translate(-25, 0, 32);
+        this.scale(3, 3, 3);
+        this.hill1.display();
+        this.popMatrix();
 
-        if(this.displayHill2){
-            this.pushMatrix();
-            this.translate(28, 0, 34);
-            this.scale(3, 3, 3);
-            this.hill2.display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.translate(28, 0, 34);
+        this.scale(3, 3, 3);
+        this.hill2.display();
+        this.popMatrix();
 
-        if(this.displayHill3){
-            this.pushMatrix();
-            this.translate(30, 0, -34);
-            this.scale(3, 3, 3);
-            this.hill2.display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.translate(30, 0, -34);
+        this.scale(3, 3, 3);
+        this.hill2.display();
+        this.popMatrix();
 
-        if(this.displayRiver){
-            this.pushMatrix();
-            this.translate(-28, -1.45, -17);
-            this.scale(1, 1, 22);
-            this.scale(3, 3, 3);
-            this.riverTexture.apply();
-            this.river.display();
-            this.popMatrix();
+        //Apllying the River
+        this.pushMatrix();
+        this.translate(-28, -1.45, -17);
+        this.scale(1, 1, 22);
+        this.scale(3, 3, 3);
+        this.riverTexture.apply();
+        this.river.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-35.5, -1.45, 17.5);
-            this.scale(6, 1, 1);
-            this.scale(3, 3, 3);
-            this.riverTexture.apply();
-            this.river.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.translate(-35.5, -1.45, 17.5);
+        this.scale(6, 1, 1);
+        this.scale(3, 3, 3);
+        this.riverTexture.apply();
+        this.river.display();
+        this.popMatrix();
 
-            this.pushMatrix();
-            this.translate(-46, -1.45, 33);
-            this.scale(1, 1, 11.3);
-            this.scale(3, 3, 3);
-            this.riverTexture.apply();
-            this.river.display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.translate(-46, -1.45, 33);
+        this.scale(1, 1, 11.3);
+        this.scale(3, 3, 3);
+        this.riverTexture.apply();
+        this.river.display();
+        this.popMatrix();
 
-        if(this.displayFirePit) {
-            this.pushMatrix();
-            this.translate(0, 1.5, -15);
-            this.rotate(-Math.PI/2, 0, 1, 0)
-            this.scale(3, 3, 3);
-            this.firePit.display();
-            this.popMatrix();
-        }
+        //Apllying the Fire Pit
+        this.pushMatrix();
+        this.translate(0, 1.5, -15);
+        this.rotate(-Math.PI/2, 0, 1, 0)
+        this.scale(3, 3, 3);
+        this.firePit.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
