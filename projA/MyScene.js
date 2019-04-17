@@ -54,8 +54,8 @@ class MyScene extends CGFscene {
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
 
-        this.day = new CGFtexture(this,'images/dayMap.png');
-        this.night = new CGFtexture(this,'images/nightMap.png');
+        this.day = new CGFtexture(this,'images/dayMap.jpg');
+        this.night = new CGFtexture(this,'images/nightMap.jpg');
 
         this.riverTexture = new CGFappearance(this);    //Specular material
         this.riverTexture.setAmbient(220/255, 220/255, 220/255, 1);
