@@ -45,6 +45,14 @@ class MyScene extends CGFscene {
         this.grassTexture.setShininess(10.0);
         this.grassTexture.loadTexture('images/grassTexture.jpg');
         this.grassTexture.setTextureWrap('REPEAT', 'REPEAT');
+        
+        this.cubeMapMaterial = new CGFappearance(this);
+        this.cubeMapMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMapMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMapMaterial.setShininess(10.0);
+        this.cubeMapMaterial.loadTexture('images/cubeMap.jpg');
+        this.cubeMapMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -55,6 +63,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.hill1 = new MyVoxelHill(this, 4);
         this.hill2 = new MyVoxelHill(this, 5);
+        this.map = new MyCubeMap(this);
 
         //Objects connected to MyInterface
         this.displayGround = true;
@@ -63,6 +72,7 @@ class MyScene extends CGFscene {
         this.displayTreeGroup = true;
         this.displayHill1 =  true;
         this.displayHill2 = true;
+        this.displayMyCubeMap = true;
         this.objectComplexity = 0.5;
     }
 
@@ -74,7 +84,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 15, 0));
     }
 
     setDefaultAppearance() {
@@ -166,6 +176,15 @@ class MyScene extends CGFscene {
             this.rotate(-Math.PI/4, 0, 1, 0);
             this.translate(-11, -0.5, 10);
             this.hill2.display();
+            this.popMatrix();
+        }
+
+        if(this.displayMyCubeMap){
+            this.pushMatrix();
+            this.translate(0,70*0.5,0);
+            this.scale(70, 70, 70);
+            this.cubeMapMaterial.apply();
+            this.map.display();
             this.popMatrix();
         }
 
