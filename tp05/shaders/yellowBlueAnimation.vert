@@ -11,8 +11,8 @@ varying vec4 position;
 varying vec2 vTextureCoord;
 
 void main() {
-
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + vec3(sin(timeFactor) * 5.0, 0, 0), 1.0);
     position = gl_Position;
-	vTextureCoord = aTextureCoord;
+
+    vTextureCoord = aTextureCoord;
 }

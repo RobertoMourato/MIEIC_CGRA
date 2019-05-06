@@ -69,7 +69,9 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture3anim.vert", "shaders/texture3anim.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
-			new CGFshader(this.gl, "shaders/yellowBlue.vert", "shaders/yellowBlue.frag")
+			new CGFshader(this.gl, "shaders/yellowBlue.vert", "shaders/yellowBlue.frag"),
+			new CGFshader(this.gl, "shaders/yellowBlueAnimation.vert", "shaders/yellowBlue.frag"),
+			new CGFshader(this.gl, "shaders/yellowBlue.vert", "shaders/grayScale.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -91,7 +93,9 @@ class ShaderScene extends CGFscene {
 			'Animation example': 6,
 			'Sepia': 7,
 			'Convolution': 8,
-			'Yellow/Blue': 9
+			'Yellow/Blue': 9,
+			'Yellow/Blue-Animation': 10,
+			'GrayScale': 11
 		};
 
 		// shader code panels references
@@ -174,6 +178,8 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		if (this.selectedExampleShader == 10)
+			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 1000 });
 	}
 
 	// main display function
