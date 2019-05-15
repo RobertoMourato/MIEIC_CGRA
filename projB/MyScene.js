@@ -21,9 +21,22 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
         this.setUpdatePeriod(50);
 
+        //Textures
+        this.cubeMap = new CGFappearance(this);
+        this.cubeMap.setAmbient(0.6, 0.6, 0.6, 1);
+        this.cubeMap.setDiffuse(1, 1, 1, 1);
+        this.cubeMap.setSpecular(1, 1, 1, 1);
+        this.cubeMap.setShininess(10.0);
+
+        this.day = new CGFtexture(this,'images/dayMap.jpg');
+        this.night = new CGFtexture(this,'images/nightMap.jpg');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
+        this.house = new MyHouse(this);
+        this.map = new MyCubeMap(this);
+        this.teste = new MyUnitCubeQuad(this, 1);
 
         //Objects connected to MyInterface
     }
@@ -42,6 +55,7 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     update(t){
 
     }
@@ -64,11 +78,34 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        
+        //Apllying cubemap
+        this.pushMatrix();
+        this.translate(0.5, 0.5, 0.5);
+        this.scale(60, 60, 60);
+        this.translate(0, 0.485, 0);
+        this.cubeMap.apply();
+        this.map.display();
+        this.popMatrix()
+        
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
+
+        //Apllying the house
+        this.pushMatrix();
+        this.translate(0, 0, 0);
+        this.scale(2, 2, 2);
+        this.house.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(3,3,3);
+        this.teste.display();
+        this.popMatrix();
+
         // ---- END Primitive drawing section
     }
 }

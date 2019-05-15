@@ -15,7 +15,7 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
         
         var obj = this;
-
+        
         return true;
     }
 }
