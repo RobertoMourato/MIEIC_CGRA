@@ -30,13 +30,13 @@ class MyScene extends CGFscene {
 
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
+        this.cubeMap.setTexture(this.day);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
         this.house = new MyHouse(this);
         this.map = new MyCubeMap(this);
-        this.teste = new MyUnitCubeQuad(this, 1);
 
         //Objects connected to MyInterface
     }
@@ -88,6 +88,7 @@ class MyScene extends CGFscene {
         this.map.display();
         this.popMatrix()
         
+        //Apllying plane
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
@@ -99,11 +100,6 @@ class MyScene extends CGFscene {
         this.translate(0, 0, 0);
         this.scale(2, 2, 2);
         this.house.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(3,3,3);
-        this.teste.display();
         this.popMatrix();
 
         // ---- END Primitive drawing section
