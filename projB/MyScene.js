@@ -22,11 +22,48 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
         //Textures
+        this.wallTexture = new CGFappearance(this);
+        this.wallTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.wallTexture.setDiffuse(1, 1, 1, 1);
+        this.wallTexture.setSpecular(1, 1, 1, 1);
+        this.wallTexture.setShininess(10.0);
+        this.wallTexture.loadTexture('images/wallTexture.jpg');
+        this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.birdTexture = new CGFappearance(this);
+        this.birdTexture.setAmbient(0, 0.8, 1, 1);
+        this.birdTexture.setDiffuse(0, 0.8, 1, 1);
+        this.birdTexture.setSpecular(1, 1, 1, 1);
+        this.birdTexture.setShininess(10.0);
+        this.birdTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.roofTexture = new CGFappearance(this);
+        this.roofTexture.setAmbient(0.3, 0.3, 0.3, 1);
+        this.roofTexture.setDiffuse(1, 1, 1, 1);
+        this.roofTexture.setSpecular(1, 1, 1, 1);
+        this.roofTexture.setShininess(10.0);
+        this.roofTexture.loadTexture('images/roofTexture.jpg');
+        this.roofTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.columnTexture = new CGFappearance(this);         
+        this.columnTexture.setAmbient(178/255, 178/255, 178/255, 1);
+        this.columnTexture.setDiffuse(178/255, 178/255, 178/255, 1);
+        this.columnTexture.setSpecular(0, 0, 0, 1);
+        this.columnTexture.setShininess(10.0);
+        this.columnTexture.loadTexture('images/columnTexture.jpg');
+        this.columnTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         this.cubeMap = new CGFappearance(this);
         this.cubeMap.setAmbient(0.6, 0.6, 0.6, 1);
         this.cubeMap.setDiffuse(1, 1, 1, 1);
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
+
+        this.birdColor = new CGFappearance(this);
+        this.birdColor.setAmbient(0.7, 0.7, 0, 1);
+        this.birdColor.setDiffuse(1, 1, 1, 1);
+        this.birdColor.setSpecular(1, 1, 1, 1);
+        this.birdColor.setShininess(10.0);
 
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
@@ -37,6 +74,7 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.house = new MyHouse(this);
         this.map = new MyCubeMap(this);
+        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
     }
@@ -47,7 +85,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -80,26 +118,32 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         
         //Apllying cubemap
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.translate(0.5, 0.5, 0.5);
         this.scale(60, 60, 60);
         this.translate(0, 0.485, 0);
         this.cubeMap.apply();
-        this.map.display();
+        //this.map.display();
         this.popMatrix()
         
         //Apllying plane
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        this.plane.display();
+        //this.plane.display();
         this.popMatrix();
 
         //Apllying the house
         this.pushMatrix();
         this.translate(0, 0, 0);
         this.scale(2, 2, 2);
-        this.house.display();
+        //this.house.display();
+        this.popMatrix();*/
+
+        //Apllying the bird
+        this.pushMatrix();
+        this.birdColor.apply();
+        this.bird.display();
         this.popMatrix();
 
         // ---- END Primitive drawing section
