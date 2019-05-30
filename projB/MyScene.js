@@ -30,12 +30,19 @@ class MyScene extends CGFscene {
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.birdTexture = new CGFappearance(this);
-        this.birdTexture.setAmbient(0, 0.8, 1, 1);
-        this.birdTexture.setDiffuse(0, 0.8, 1, 1);
-        this.birdTexture.setSpecular(1, 1, 1, 1);
-        this.birdTexture.setShininess(10.0);
-        this.birdTexture.setTextureWrap('REPEAT', 'REPEAT');
+        this.birdColor = new CGFappearance(this);
+        this.birdColor.setAmbient(0, 0.8, 1, 1);
+        this.birdColor.setDiffuse(0, 0.8, 1, 1);
+        this.birdColor.setSpecular(1, 1, 1, 1);
+        this.birdColor.setShininess(10.0);
+        this.birdColor.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.birdFace = new CGFappearance(this);
+        this.birdFace.setAmbient(1, 1, 0, 1);
+        this.birdFace.setDiffuse(1, 1, 0, 1);
+        this.birdFace.setSpecular(1, 1, 1, 1);
+        this.birdFace.setShininess(10.0);
+        this.birdFace.setTextureWrap('REPEAT', 'REPEAT');
 
         this.roofTexture = new CGFappearance(this);
         this.roofTexture.setAmbient(0.3, 0.3, 0.3, 1);
@@ -58,12 +65,6 @@ class MyScene extends CGFscene {
         this.cubeMap.setDiffuse(1, 1, 1, 1);
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
-
-        this.birdColor = new CGFappearance(this);
-        this.birdColor.setAmbient(0.7, 0.7, 0, 1);
-        this.birdColor.setDiffuse(1, 1, 1, 1);
-        this.birdColor.setSpecular(1, 1, 1, 1);
-        this.birdColor.setShininess(10.0);
 
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
@@ -142,7 +143,6 @@ class MyScene extends CGFscene {
 
         //Apllying the bird
         this.pushMatrix();
-        this.birdColor.apply();
         this.bird.display();
         this.popMatrix();
 
