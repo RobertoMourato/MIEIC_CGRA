@@ -78,6 +78,7 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        this.var = 0;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -96,7 +97,8 @@ class MyScene extends CGFscene {
     }
 
     update(t){
-
+        this.var++;
+        this.height = 3 + (Math.sin(t / 125) / 2);
     }
 
     display() {
@@ -131,18 +133,19 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        //this.plane.display();
+        this.plane.display();
         this.popMatrix();
 
         //Apllying the house
         this.pushMatrix();
-        this.translate(0, 0, 0);
+        //this.translate(0, 0, 0);
         this.scale(2, 2, 2);
-        //this.house.display();
+        this.house.display();
         this.popMatrix();*/
 
         //Apllying the bird
         this.pushMatrix();
+        this.translate(0, this.height, 0);
         this.bird.display();
         this.popMatrix();
 

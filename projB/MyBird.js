@@ -6,10 +6,10 @@ class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.head = new MyUnitCubeQuad(scene, 1); 
-        this.body = new MyUnitCubeQuad(scene, 1);
+        this.head = new MyUnitCubeQuad(scene); 
+        this.body = new MyUnitCubeQuad(scene);
         this.tail = new MyCone(scene, 4, 1);
-        this.eye = new MyUnitCubeQuad(scene, 1);
+        this.eye = new MyUnitCubeQuad(scene);
         this.nose = new MyCone(scene, 4, 1);
         this.wingBack = new MyQuad(scene);
         this.wingFront = new TriRet(scene);

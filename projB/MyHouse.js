@@ -5,14 +5,15 @@
 class MyHouse extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.cube= new MyUnitCubeQuad(scene, 0);
+        this.cube= new MyUnitCubeQuad(scene);
         this.pyramid= new MyPyramid(scene, 4, 1);
         this.prism= new MyPrism(scene, 9, 1);
     }
     
-    display(scene) {
+    display() {
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
+        //this.scene.wallTexture.apply();
         this.cube.display();    
         this.scene.popMatrix();
 
@@ -34,18 +35,21 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0.73, 0, -0.73);
         this.scene.scale(0.2, 1, 0.2);
+        this.scene.columnTexture.apply();
         this.prism.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.73, 0, 0.73);
         this.scene.scale(0.2, 1, 0.2);
+        this.scene.columnTexture.apply();
         this.prism.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.73, 0, -0.73);
         this.scene.scale(0.2, 1, 0.2);
+        this.scene.columnTexture.apply();
         this.prism.display();
         this.scene.popMatrix();
     }
