@@ -127,7 +127,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        
+        /*
         //Applying cubemap
         this.pushMatrix();
         this.translate(0.5, 0.5, 0.5);
@@ -135,7 +135,7 @@ class MyScene extends CGFscene {
         this.translate(0, 0.485, 0);
         this.cubeMap.apply();
         this.map.display();
-        this.popMatrix()
+        this.popMatrix()*/
         
         //Applying plane
         this.pushMatrix();
@@ -144,19 +144,19 @@ class MyScene extends CGFscene {
         this.terrain.apply();
         this.plane.display();
         this.popMatrix();
-
+        /*
         //Applying the house
         this.pushMatrix();
         this.translate(-5,0,-5);
         this.scale(2, 2, 2);
         this.house.display();
-        this.popMatrix();
-
-        //Apllying the bird
+        this.popMatrix();*/
+        /*
+        //Applying the bird
         this.pushMatrix();
         this.translate(0, this.height, 0);
         this.bird.display();
-        this.popMatrix();
+        this.popMatrix();*/
 
         // ---- END Primitive drawing section
     }
