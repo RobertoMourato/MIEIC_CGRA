@@ -13,7 +13,7 @@ class MyHouse extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
-        //this.scene.wallTexture.apply();
+        this.scene.wallTexture.apply();
         this.cube.display();    
         this.scene.popMatrix();
 

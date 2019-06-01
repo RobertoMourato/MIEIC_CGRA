@@ -19,7 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(1000/60);
 
         //Textures
         this.wallTexture = new CGFappearance(this);
@@ -29,6 +29,14 @@ class MyScene extends CGFscene {
         this.wallTexture.setShininess(10.0);
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.terrain = new CGFappearance(this);
+        this.terrain.setAmbient(0.3, 0.3, 0.3, 1);
+        this.terrain.setDiffuse(1, 1, 1, 1);
+        this.terrain.setSpecular(1, 1, 1, 1);
+        this.terrain.setShininess(10.0);
+        this.terrain.loadTexture('images/terrain.jpg');
+        this.terrain.setTextureWrap('REPEAT', 'REPEAT');
 
         this.birdColor = new CGFappearance(this);
         this.birdColor.setAmbient(0, 0.8, 1, 1);
@@ -120,28 +128,29 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         
-        //Apllying cubemap
-        /*this.pushMatrix();
+        //Applying cubemap
+        this.pushMatrix();
         this.translate(0.5, 0.5, 0.5);
         this.scale(60, 60, 60);
         this.translate(0, 0.485, 0);
         this.cubeMap.apply();
-        //this.map.display();
+        this.map.display();
         this.popMatrix()
         
-        //Apllying plane
+        //Applying plane
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
+        this.terrain.apply();
         this.plane.display();
         this.popMatrix();
 
-        //Apllying the house
+        //Applying the house
         this.pushMatrix();
-        //this.translate(0, 0, 0);
+        this.translate(-5,0,-5);
         this.scale(2, 2, 2);
         this.house.display();
-        this.popMatrix();*/
+        this.popMatrix();
 
         //Apllying the bird
         this.pushMatrix();
