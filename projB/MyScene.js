@@ -29,14 +29,14 @@ class MyScene extends CGFscene {
         this.wallTexture.setShininess(10.0);
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
-
+/*
         this.terrain = new CGFappearance(this);
         this.terrain.setAmbient(0.3, 0.3, 0.3, 1);
         this.terrain.setDiffuse(1, 1, 1, 1);
         this.terrain.setSpecular(1, 1, 1, 1);
         this.terrain.setShininess(10.0);
         this.terrain.loadTexture('images/terrain.jpg');
-        this.terrain.setTextureWrap('REPEAT', 'REPEAT');
+        this.terrain.setTextureWrap('REPEAT', 'REPEAT');*/
 
         this.birdColor = new CGFappearance(this);
         this.birdColor.setAmbient(0, 0.8, 1, 1);
@@ -80,7 +80,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
+        this.plane = new MyTerrain(this);
         this.house = new MyHouse(this);
         this.map = new MyCubeMap(this);
         this.bird = new MyBird(this);
@@ -95,7 +95,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -140,8 +140,8 @@ class MyScene extends CGFscene {
         //Applying plane
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
-        this.terrain.apply();
+        this.scale(60, 60, 15);
+        //this.terrain.apply();
         this.plane.display();
         this.popMatrix();
         /*
