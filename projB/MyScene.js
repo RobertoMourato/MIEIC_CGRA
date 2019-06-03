@@ -96,7 +96,8 @@ class MyScene extends CGFscene {
             new MyTreeBranch(this),
             new MyTreeBranch(this),
             new MyTreeBranch(this)
-        ]
+        ];
+        this.nest = new MyNest(this);
 
         //Objects connected to MyInterface
         this.axiom = /*"F--F--F";*/  "X"; //
@@ -278,6 +279,12 @@ class MyScene extends CGFscene {
         this.rotate(Math.PI/2, 1, 0, 0);
         this.translate(6.8, -12, -3.4);
         this.branches[3].display();
+        this.popMatrix();
+
+        //Applying the nest
+        this.pushMatrix();
+        this.translate(0, 4, 0);
+        this.nest.display();
         this.popMatrix();
 
         //Applying lightning
