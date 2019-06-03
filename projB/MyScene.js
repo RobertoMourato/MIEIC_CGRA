@@ -110,6 +110,7 @@ class MyScene extends CGFscene {
         // do initial generation
         this.doGenerate();
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -125,7 +126,7 @@ class MyScene extends CGFscene {
         this.lights[2].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -136,8 +137,50 @@ class MyScene extends CGFscene {
 
     update(t){
         this.bird.updateWings(t);
-        this.height = 3 + (Math.sin(t / 125) / 2);
-        this.bird.updateWings(t);
+        this.height = Math.sin(t / 125) / 2 ;
+        this.checkKeys(t);
+    }
+
+    checkKeys(t) {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text+=" W ";
+            keysPressed=true;
+            this.bird.accelerate(this.speedFactor);
+            this.speedFactor += 0.05;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text+=" S ";
+            keysPressed=true;
+            this.bird.accelerate(-this.speedFactor);
+            this.speedFactor -= 0.05;
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            this.bird.turn(0.05);
+            text+=" A ";
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            this.bird.turn(-0.05);
+            text+=" D ";
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.bird.reset();
+            text+=" R ";
+            keysPressed=true;
+        }
+        if (keysPressed) {
+            console.log(text);
+            console.log(this.speedFactor);
+            console.log(this.bird.speed);
+            console.log(this.bird.angle);
+            console.log(this.bird.position_x);
+            console.log(this.bird.position_z);
+        }
     }
 
     display() {
@@ -182,12 +225,12 @@ class MyScene extends CGFscene {
         this.scale(3, 3, 3);
         this.house.display();
         this.popMatrix();
-        /*
+        
         //Applying the bird
         this.pushMatrix();
-        this.translate(0, this.height, 0);
+        this.translate(0, 10 + this.height, 0);
         this.bird.display();
-        this.popMatrix();*/
+        this.popMatrix();
 
         //Applying lightning
         if(this.displayLightning){
