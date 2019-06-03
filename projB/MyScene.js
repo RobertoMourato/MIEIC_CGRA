@@ -114,6 +114,14 @@ class MyScene extends CGFscene {
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
+        this.lights[2].setPosition(0, 1.5, -15, 1);
+        this.lights[2].setAmbient(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setDiffuse(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setSpecular(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setLinearAttenuation(0.8);
+        this.lights[2].disable();
+        this.lights[2].update();
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 100, 15), vec3.fromValues(0, 0, 0));
