@@ -29,14 +29,6 @@ class MyScene extends CGFscene {
         this.wallTexture.setShininess(10.0);
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
-/*
-        this.terrain = new CGFappearance(this);
-        this.terrain.setAmbient(0.3, 0.3, 0.3, 1);
-        this.terrain.setDiffuse(1, 1, 1, 1);
-        this.terrain.setSpecular(1, 1, 1, 1);
-        this.terrain.setShininess(10.0);
-        this.terrain.loadTexture('images/terrain.jpg');
-        this.terrain.setTextureWrap('REPEAT', 'REPEAT');*/
 
         this.birdColor = new CGFappearance(this);
         this.birdColor.setAmbient(0, 0.8, 1, 1);
@@ -75,10 +67,10 @@ class MyScene extends CGFscene {
         this.cubeMap.setShininess(10.0);
 
         this.lightText = new CGFappearance(this);
-        this.lightText.setAmbient(1.0, 0.8, 1.0, 1.0);
-        this.lightText.setDiffuse(1.0, 0.8, 1.0, 1.0);
-        this.lightText.setSpecular(0.5, 0.5, 0.5, 1.0);
-        this.lightText.setShininess(10.0);
+        this.lightText.setAmbient(1, 1, 0, 1);
+        this.lightText.setDiffuse(1, 1, 0, 1);
+        this.lightText.setSpecular(1, 1, 0, 1);
+        this.lightText.setShininess(10);
 
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
@@ -93,6 +85,29 @@ class MyScene extends CGFscene {
         this.displayLightning = false;
 
         //Objects connected to MyInterface
+        this.axiom = /*"F--F--F";*/  "X"; //
+        this.ruleF = /*"F+F--F+F"; */ "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scaleFactor = 0.5;
+        this.lSystem = new MyLSPlant(this);
+
+        this.doGenerate = function () {
+            this.lSystem.generate(
+                this.axiom,
+                {
+                    "F": [ this.ruleF ],
+                    "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "​F[/X][X]F[\\X]+X", "F[\X][X]/X", "F[/X]\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X" ]
+                },
+                this.angle,
+                this.iterations,
+                this.scaleFactor
+            );
+        }
+
+        // do initial generation
+        this.doGenerate();
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -186,6 +201,12 @@ class MyScene extends CGFscene {
             this.lightning.display();
             this.popMatrix();
         }
+
+        this.pushMatrix();
+        this.translate(0,2,3);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
