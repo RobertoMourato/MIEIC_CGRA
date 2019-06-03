@@ -138,12 +138,23 @@ class MyScene extends CGFscene {
     update(t){
         this.bird.updateWings(t);
         this.height = Math.sin(t / 125) / 2 ;
+        if(this.displayLightning){
+            this.lightning.update(t);
+        }
         this.checkKeys(t);
     }
 
     checkKeys(t) {
         var text="Keys pressed: ";
         var keysPressed=false;
+
+        if(this.gui.isKeyPressed("KeyL")){
+            if(!this.displayLightning){
+                this.lightning = new MyLightning(this);
+                this.lightning.startAnimation(t);
+                this.displayLightning = true;
+            }
+        }
         
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
