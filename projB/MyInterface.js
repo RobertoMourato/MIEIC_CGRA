@@ -18,8 +18,8 @@ class MyInterface extends CGFinterface {
 
         this.initKeys();
 
-        this.gui.add(this.scene, 'speedFactor').name('Speed Factor');
-        this.gui.add(this.scene, 'scaleFactor').name('Scale Factor');
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+        this.gui.add(this.scene, 'scaleFactorDois', 0.5, 3).name('Scale Factor');
         
         this.initKeys();
 

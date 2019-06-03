@@ -24,8 +24,8 @@ class MyBird extends CGFobject {
  
     display() {
         this.scene.pushMatrix();
-        this.scene.rotate(this.angle, 0, 1, 0);
         this.scene.translate(this.position_x, this.position_y, this.position_z);
+        this.scene.rotate(this.angle, 0, 1, 0);
 
             this.scene.pushMatrix();
             this.scene.birdColor.apply();
@@ -93,14 +93,33 @@ class MyBird extends CGFobject {
         this.scene.rotate(this.angle, 0, 1, 0);
     }
 
+    update(t) {
+        if(Math.abs(this.position_x) <= 28.5 && Math.abs(this.position_z) <= 28) {
+            this.position_x += Math.cos(this.angle) * this.speed;
+            this.position_z += Math.sin(-this.angle) * this.speed;
+        }
+        else if (this.position_x > 28.5) {
+            this.position_x = 28;
+        }
+        else if (this.position_z > 28) {
+            this.position_z = 28;
+        }
+        else if (this.position_x < -28.5) {
+            this.position_x = -28;
+        }
+        else if (this.position_z < -28) {
+            this.position_z = -28;
+        }
+    }
+
     accelerate(v) {
-        this.speed = v;
+        this.speed += (v/100);
         if(this.speed < 0) {
             this.speed = 0;
         }
         else {
             this.position_x += Math.cos(this.angle) * (this.speed/1000);
-            this.position_z += Math.sin(this.angle) * (this.speed/1000);
+            this.position_z -= Math.sin(this.angle) * (this.speed/1000);
         }
     }
 

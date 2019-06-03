@@ -91,6 +91,7 @@ class MyScene extends CGFscene {
         this.angle = 30.0;
         this.iterations = 4;
         this.scaleFactor = 0.5;
+        this.scaleFactorDois = 1;
         this.speedFactor = 1;
         this.lSystem = new MyLSPlant(this);
 
@@ -126,7 +127,7 @@ class MyScene extends CGFscene {
         this.lights[2].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 100, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -136,8 +137,13 @@ class MyScene extends CGFscene {
     }
 
     update(t){
+        t *= this.speedFactor;
         this.bird.updateWings(t);
+        this.bird.update(t);
         this.height = Math.sin(t / 125) / 2 ;
+        if(this.displayLightning){
+            this.lightning.update(t);
+        }
         this.checkKeys(t);
     }
 
@@ -145,18 +151,24 @@ class MyScene extends CGFscene {
         var text="Keys pressed: ";
         var keysPressed=false;
         
+        if(this.gui.isKeyPressed("KeyL")){
+            if(!this.displayLightning){
+                this.lightning = new MyLightning(this);
+                this.lightning.startAnimation(t);
+                this.displayLightning = true;
+            }
+        }
+        
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             text+=" W ";
             keysPressed=true;
             this.bird.accelerate(this.speedFactor);
-            this.speedFactor += 0.05;
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
             keysPressed=true;
             this.bird.accelerate(-this.speedFactor);
-            this.speedFactor -= 0.05;
         }
         if (this.gui.isKeyPressed("KeyA")) {
             this.bird.turn(0.05);
@@ -170,16 +182,12 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyR")) {
             this.bird.reset();
+            this.speedFactor = 1;
             text+=" R ";
             keysPressed=true;
         }
         if (keysPressed) {
             console.log(text);
-            console.log(this.speedFactor);
-            console.log(this.bird.speed);
-            console.log(this.bird.angle);
-            console.log(this.bird.position_x);
-            console.log(this.bird.position_z);
         }
     }
 
@@ -228,7 +236,8 @@ class MyScene extends CGFscene {
         
         //Applying the bird
         this.pushMatrix();
-        this.translate(0, 10 + this.height, 0);
+        this.translate(0, 15 + this.height, 0);
+        this.scale(this.scaleFactorDois, this.scaleFactorDois, this.scaleFactorDois);
         this.bird.display();
         this.popMatrix();
 
