@@ -60,6 +60,14 @@ class MyScene extends CGFscene {
         this.columnTexture.loadTexture('images/columnTexture.jpg');
         this.columnTexture.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.trunkTexture = new CGFappearance(this);
+        this.trunkTexture.setAmbient(122/255, 58/255, 6/255, 1);
+        this.trunkTexture.setDiffuse(122/255, 58/255, 6/255, 1);
+        this.trunkTexture.setSpecular(0, 0, 0, 1);
+        this.trunkTexture.setShininess(10.0);
+        this.trunkTexture.loadTexture('images/TrunkTexture.jpg');
+        this.trunkTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         this.cubeMap = new CGFappearance(this);
         this.cubeMap.setAmbient(0.6, 0.6, 0.6, 1);
         this.cubeMap.setDiffuse(1, 1, 1, 1);
@@ -83,6 +91,12 @@ class MyScene extends CGFscene {
         this.map = new MyCubeMap(this);
         this.bird = new MyBird(this);
         this.displayLightning = false;
+        this.branches = [
+            new MyTreeBranch(this),
+            new MyTreeBranch(this),
+            new MyTreeBranch(this),
+            new MyTreeBranch(this)
+        ]
 
         //Objects connected to MyInterface
         this.axiom = /*"F--F--F";*/  "X"; //
@@ -127,7 +141,7 @@ class MyScene extends CGFscene {
         this.lights[2].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 100, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 100, 90), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -151,14 +165,6 @@ class MyScene extends CGFscene {
         var text="Keys pressed: ";
         var keysPressed=false;
 
-        if(this.gui.isKeyPressed("KeyL")){
-            if(!this.displayLightning){
-                this.lightning = new MyLightning(this);
-                this.lightning.startAnimation(t);
-                this.displayLightning = true;
-            }
-        }
-        
         if(this.gui.isKeyPressed("KeyL")){
             if(!this.displayLightning){
                 this.lightning = new MyLightning(this);
@@ -247,6 +253,31 @@ class MyScene extends CGFscene {
         this.translate(0, 15 + this.height, 0);
         this.scale(this.scaleFactorDois, this.scaleFactorDois, this.scaleFactorDois);
         this.bird.display();
+        this.popMatrix();
+
+        //Applying the branches
+        this.pushMatrix();
+        this.rotate(Math.PI/2, 1, 0.5, 0);
+        this.translate(-5, 5, -4.5);
+        this.branches[0].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(Math.PI/2, 1, -0.5, 0);
+        this.translate(12, 3.5, -9);
+        this.branches[1].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(Math.PI/2, 1, 0.3, 0);
+        this.translate(-11, -5, -8);
+        this.branches[2].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(Math.PI/2, 1, 0, 0);
+        this.translate(6.8, -12, -3.4);
+        this.branches[3].display();
         this.popMatrix();
 
         //Applying lightning

@@ -4,7 +4,8 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 
 serialInclude(['../lib/CGF.js','MyScene.js', 'MyInterface.js', 'Plane.js', 'MyCone.js', 'MyCubeMap.js', 'MyCylinder.js',
 'MyHouse.js', 'MyPrism.js', 'MyPyramid.js', 'MyQuad.js', 'MyUnitCubeQuad.js', 'TriRet.js', 'MyBird.js', 'MyTerrain.js',
-'MyWing.js', 'MyLightning.js', 'MyLSystem.js', 'MyLSPlant.js', 'MyBranch.js', 'MyLeaf.js', 'MyRectangle.js',
+'MyWing.js', 'MyLightning.js', 'MyLSystem.js', 'MyLSPlant.js', 'MyBranch.js', 'MyLeaf.js', 'MyRectangle.js', 
+'MyTreeBranch.js',
 
 main=function() {
     var app = new CGFapplication(document.body);
