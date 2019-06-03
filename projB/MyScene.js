@@ -160,19 +160,12 @@ class MyScene extends CGFscene {
             this.lightning.update(t);
         }
         this.checkKeys(t);
+        this.bird.pickABranch(t);
     }
 
     checkKeys(t) {
         var text="Keys pressed: ";
         var keysPressed=false;
-
-        if(this.gui.isKeyPressed("KeyL")){
-            if(!this.displayLightning){
-                this.lightning = new MyLightning(this);
-                this.lightning.startAnimation(t);
-                this.displayLightning = true;
-            }
-        }
         
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
@@ -186,21 +179,36 @@ class MyScene extends CGFscene {
             this.bird.accelerate(-this.speedFactor);
         }
         if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.turn(0.05);
             text+=" A ";
             keysPressed=true;
+            this.bird.turn(0.05);
         }
         if (this.gui.isKeyPressed("KeyD")) {
-            this.bird.turn(-0.05);
             text+=" D ";
             keysPressed=true;
+            this.bird.turn(-0.05);
         }
         if (this.gui.isKeyPressed("KeyR")) {
-            this.bird.reset();
-            this.speedFactor = 1;
             text+=" R ";
             keysPressed=true;
+            this.bird.reset();
+            this.speedFactor = 1;
         }
+        if(this.gui.isKeyPressed("KeyL")){
+            text+=" L ";
+            keysPressed=true;
+            if(!this.displayLightning){
+                this.lightning = new MyLightning(this);
+                this.lightning.startAnimation(t);
+                this.displayLightning = true;
+            }
+        }
+        if(this.gui.isKeyPressed("KeyP")) {
+            text+=" P ";
+            keysPressed=true;
+            this.bird.down = true;
+        }
+
         if (keysPressed) {
             console.log(text);
         }

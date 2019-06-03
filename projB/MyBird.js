@@ -20,6 +20,8 @@ class MyBird extends CGFobject {
         this.position_x = 0;
         this.position_y = 0;
         this.position_z = 0;
+
+        this.down = false;
     }
  
     display() {
@@ -130,5 +132,14 @@ class MyBird extends CGFobject {
         this.position_x = 0;
         this.position_y = 0;
         this.position_z = 0;
+    }
+
+    pickABranch(t) {
+        if(this.down == true) {
+            this.position_y = - Math.abs(11 * Math.cos((t/1000)));
+        }
+        if(Math.abs(this.position_y) < 0.5) {
+            this.down = false;
+        }
     }
 }
