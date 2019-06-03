@@ -150,6 +150,14 @@ class MyScene extends CGFscene {
     checkKeys(t) {
         var text="Keys pressed: ";
         var keysPressed=false;
+
+        if(this.gui.isKeyPressed("KeyL")){
+            if(!this.displayLightning){
+                this.lightning = new MyLightning(this);
+                this.lightning.startAnimation(t);
+                this.displayLightning = true;
+            }
+        }
         
         if(this.gui.isKeyPressed("KeyL")){
             if(!this.displayLightning){
