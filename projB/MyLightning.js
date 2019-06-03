@@ -11,11 +11,11 @@ class MyLightning extends CGFobject {
             "X",
             {
                 "F": ["FF"],
-                "X": ["F[-X][X]F[-X]+FX"]
+                "X": ["FFF[-X][X]F[-X]+FX", "​FFF[/X][X]F[\\X]+X", "FFF[-X][X]F[-XF]+X", "FFF[^X][X]F[&X]^X", "FFF[F-XF][FXF]+X"]
             },
             25,
             3,
-            0.7
+            0.85
         )
         this.timeIteration=1/this.axiom.length;
     }

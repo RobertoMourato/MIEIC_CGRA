@@ -101,7 +101,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 70, 50), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 100, 50), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -180,7 +180,7 @@ class MyScene extends CGFscene {
 
         if(this.displayLightning){
             this.pushMatrix();
-            this.translate(0,20,0);
+            this.translate(5,27,-8);
             this.rotate(Math.PI, 1, 0, 0);
             this.lightText.apply();
             this.lightning.display();
