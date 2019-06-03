@@ -29,14 +29,6 @@ class MyScene extends CGFscene {
         this.wallTexture.setShininess(10.0);
         this.wallTexture.loadTexture('images/wallTexture.jpg');
         this.wallTexture.setTextureWrap('REPEAT', 'REPEAT');
-/*
-        this.terrain = new CGFappearance(this);
-        this.terrain.setAmbient(0.3, 0.3, 0.3, 1);
-        this.terrain.setDiffuse(1, 1, 1, 1);
-        this.terrain.setSpecular(1, 1, 1, 1);
-        this.terrain.setShininess(10.0);
-        this.terrain.loadTexture('images/terrain.jpg');
-        this.terrain.setTextureWrap('REPEAT', 'REPEAT');*/
 
         this.birdColor = new CGFappearance(this);
         this.birdColor.setAmbient(0, 0.8, 1, 1);
@@ -74,6 +66,12 @@ class MyScene extends CGFscene {
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
 
+        this.lightText = new CGFappearance(this);
+        this.lightText.setAmbient(1, 1, 0, 1);
+        this.lightText.setDiffuse(1, 1, 0, 1);
+        this.lightText.setSpecular(1, 1, 0, 1);
+        this.lightText.setShininess(10);
+
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
         this.cubeMap.setTexture(this.day);
@@ -84,19 +82,50 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.map = new MyCubeMap(this);
         this.bird = new MyBird(this);
+        this.displayLightning = false;
 
         //Objects connected to MyInterface
+        this.axiom = /*"F--F--F";*/  "X"; //
+        this.ruleF = /*"F+F--F+F"; */ "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scaleFactor = 0.5;
         this.speedFactor = 1;
-        this.scaleFactor = 1;
+        this.lSystem = new MyLSPlant(this);
+
+        this.doGenerate = function () {
+            this.lSystem.generate(
+                this.axiom,
+                {
+                    "F": [ this.ruleF ],
+                    "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "​F[/X][X]F[\\X]+X", "F[\X][X]/X", "F[/X]\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X" ]
+                },
+                this.angle,
+                this.iterations,
+                this.scaleFactor
+            );
+        }
+
+        // do initial generation
+        this.doGenerate();
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
+        this.lights[2].setPosition(0, 1.5, -15, 1);
+        this.lights[2].setAmbient(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setDiffuse(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setSpecular(240/255, 178/255, 4/255, 1.0);
+        this.lights[2].setLinearAttenuation(0.8);
+        this.lights[2].disable();
+        this.lights[2].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -108,51 +137,8 @@ class MyScene extends CGFscene {
     update(t){
         this.bird.updateWings(t);
         this.height = 3 + (Math.sin(t / 125) / 2);
-        this.checkKeys(t);
+        this.bird.updateWings(t);
     }
-
-    checkKeys(t) {
-        var text="Keys pressed: ";
-        var keysPressed=false;
-        
-        // Check for key codes e.g. in https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
-            text+=" W ";
-            keysPressed=true;
-            this.bird.accelerate(this.speedFactor);
-            this.speedFactor += 0.05;
-        }
-        if (this.gui.isKeyPressed("KeyS")) {
-            text+=" S ";
-            keysPressed=true;
-            this.bird.accelerate(-this.speedFactor);
-            this.speedFactor -= 0.05;
-        }
-        if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.turn(0.05);
-            text+=" A ";
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyD")) {
-            this.bird.turn(-0.05);
-            text+=" D ";
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyR")) {
-            this.bird.reset();
-            text+=" R ";
-            keysPressed=true;
-        }
-        if (keysPressed) {
-            console.log(text);
-            console.log(this.speedFactor);
-            console.log(this.bird.speed);
-            console.log(this.bird.angle);
-            console.log(this.bird.position_x);
-            console.log(this.bird.position_z);
-        }
-    }
-        
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -172,35 +158,98 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        /*
+        
         //Applying cubemap
+        //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         this.pushMatrix();
         this.translate(0.5, 0.5, 0.5);
         this.scale(60, 60, 60);
         this.translate(0, 0.485, 0);
         this.cubeMap.apply();
         this.map.display();
-        this.popMatrix()*/
+        this.popMatrix()
         
         //Applying plane
-        /*this.pushMatrix();
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 15);
-        //this.terrain.apply();
         this.plane.display();
-        this.popMatrix();*/
+        this.popMatrix();
         
         //Applying the house
-        /*this.pushMatrix();
-        this.translate(-5,0,-5);
-        this.scale(2, 2, 2);
+        this.pushMatrix();
+        this.translate(-6.5,2.7,-6);
+        this.scale(3, 3, 3);
         this.house.display();
-        this.popMatrix();*/
-        
+        this.popMatrix();
+        /*
         //Applying the bird
         this.pushMatrix();
         this.translate(0, this.height, 0);
         this.bird.display();
+        this.popMatrix();*/
+
+        //Applying lightning
+        if(this.displayLightning){
+            this.pushMatrix();
+            this.translate(5,27,-8);
+            this.rotate(Math.PI, 1, 0, 0);
+            this.lightText.apply();
+            this.lightning.display();
+            this.popMatrix();
+        }
+
+        //Applying trees
+        this.pushMatrix();
+        this.translate(5,2,3);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(7,2,5);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(7,2,3);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(9,2,5);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(6,1,1);
+        this.rotate(Math.PI/4,0,1,0);
+        this.pushMatrix();
+        this.translate(5,2,3);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(7,2,5);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(7,2,3);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(9,2,5);
+        this.scale(1.5, 2, 1.5);
+        this.lSystem.display();
+        this.popMatrix();
         this.popMatrix();
 
         // ---- END Primitive drawing section
