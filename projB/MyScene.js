@@ -86,7 +86,6 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
-        this.var = 0;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -95,7 +94,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -105,8 +104,8 @@ class MyScene extends CGFscene {
     }
 
     update(t){
-        this.var++;
         this.height = 3 + (Math.sin(t / 125) / 2);
+        this.bird.updateWings(t);
     }
 
     display() {
@@ -138,25 +137,25 @@ class MyScene extends CGFscene {
         this.popMatrix()*/
         
         //Applying plane
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 15);
         //this.terrain.apply();
         this.plane.display();
-        this.popMatrix();
-        /*
+        this.popMatrix();*/
+        
         //Applying the house
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.translate(-5,0,-5);
         this.scale(2, 2, 2);
         this.house.display();
         this.popMatrix();*/
-        /*
+        
         //Applying the bird
         this.pushMatrix();
         this.translate(0, this.height, 0);
         this.bird.display();
-        this.popMatrix();*/
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
