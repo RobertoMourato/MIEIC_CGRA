@@ -74,6 +74,12 @@ class MyScene extends CGFscene {
         this.cubeMap.setSpecular(1, 1, 1, 1);
         this.cubeMap.setShininess(10.0);
 
+        this.lightText = new CGFappearance(this);
+        this.lightText.setAmbient(1.0, 0.8, 1.0, 1.0);
+        this.lightText.setDiffuse(1.0, 0.8, 1.0, 1.0);
+        this.lightText.setSpecular(0.5, 0.5, 0.5, 1.0);
+        this.lightText.setShininess(10.0);
+
         this.day = new CGFtexture(this,'images/dayMap.jpg');
         this.night = new CGFtexture(this,'images/nightMap.jpg');
         this.cubeMap.setTexture(this.day);
@@ -84,6 +90,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this);
         this.map = new MyCubeMap(this);
         this.bird = new MyBird(this);
+        this.displayLightning = false;
 
         //Objects connected to MyInterface
     }
@@ -94,7 +101,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 70, 50), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -106,6 +113,20 @@ class MyScene extends CGFscene {
     update(t){
         this.height = 3 + (Math.sin(t / 125) / 2);
         this.bird.updateWings(t);
+        if(this.displayLightning){
+            this.lightning.update(t);
+        }
+        this.pressedKeys(t);
+    }
+
+    pressedKeys(t){
+        if(this.gui.isKeyPressed("KeyL")){
+            if(!this.displayLightning){
+                this.lightning = new MyLightning(this);
+                this.lightning.startAnimation(t);
+                this.displayLightning = true;
+            }
+        }
     }
 
     display() {
@@ -137,12 +158,12 @@ class MyScene extends CGFscene {
         this.popMatrix()*/
         
         //Applying plane
-        /*this.pushMatrix();
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 15);
         //this.terrain.apply();
         this.plane.display();
-        this.popMatrix();*/
+        this.popMatrix();
         
         //Applying the house
         /*this.pushMatrix();
@@ -150,12 +171,21 @@ class MyScene extends CGFscene {
         this.scale(2, 2, 2);
         this.house.display();
         this.popMatrix();*/
-        
+        /*
         //Applying the bird
         this.pushMatrix();
         this.translate(0, this.height, 0);
         this.bird.display();
-        this.popMatrix();
+        this.popMatrix();*/
+
+        if(this.displayLightning){
+            this.pushMatrix();
+            this.translate(0,20,0);
+            this.rotate(Math.PI, 1, 0, 0);
+            this.lightText.apply();
+            this.lightning.display();
+            this.popMatrix();
+        }
 
         // ---- END Primitive drawing section
     }
