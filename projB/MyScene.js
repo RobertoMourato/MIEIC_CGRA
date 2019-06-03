@@ -86,6 +86,8 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        this.speedFactor = 1;
+        this.scaleFactor = 1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -94,7 +96,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 200), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -104,9 +106,53 @@ class MyScene extends CGFscene {
     }
 
     update(t){
-        this.height = 3 + (Math.sin(t / 125) / 2);
         this.bird.updateWings(t);
+        this.height = 3 + (Math.sin(t / 125) / 2);
+        this.checkKeys(t);
     }
+
+    checkKeys(t) {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text+=" W ";
+            keysPressed=true;
+            this.bird.accelerate(this.speedFactor);
+            this.speedFactor += 0.05;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text+=" S ";
+            keysPressed=true;
+            this.bird.accelerate(-this.speedFactor);
+            this.speedFactor -= 0.05;
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            this.bird.turn(0.05);
+            text+=" A ";
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            this.bird.turn(-0.05);
+            text+=" D ";
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            this.bird.reset();
+            text+=" R ";
+            keysPressed=true;
+        }
+        if (keysPressed) {
+            console.log(text);
+            console.log(this.speedFactor);
+            console.log(this.bird.speed);
+            console.log(this.bird.angle);
+            console.log(this.bird.position_x);
+            console.log(this.bird.position_z);
+        }
+    }
+        
 
     display() {
         // ---- BEGIN Background, camera and axis setup
