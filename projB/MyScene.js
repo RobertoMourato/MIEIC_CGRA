@@ -97,6 +97,18 @@ class MyScene extends CGFscene {
             new MyTreeBranch(this),
             new MyTreeBranch(this)
         ];
+        this.branchesbool = [
+            true,
+            true,
+            true,
+            true
+        ];
+        this.coords = [
+            [-5,5,-4.5],
+            [12,3.5,-9],
+            [-11,-5,-8],
+            [6.8,-12,-3.4]
+        ]
         this.nest = new MyNest(this);
 
         //Objects connected to MyInterface
@@ -207,6 +219,20 @@ class MyScene extends CGFscene {
             text+=" P ";
             keysPressed=true;
             this.bird.down = true;
+            if(!this.bird.carryingBranch){
+                for(var i=0;i<4;i++){
+                    console.log(i, this.coords[i][0], this.bird.position_x, this.coords[i][2], this.bird.position_z, Math.abs(this.coords[i][0]-this.bird.position_x), Math.abs(this.coords[i][2]-this.bird.position_z));
+                    if(Math.abs(this.coords[i][0]-this.bird.position_x) < 6 && Math.abs(this.coords[i][2]-this.bird.position_z) < 6){
+                        this.branchesbool[i]=false;
+                        this.bird.carryingBranch=true;
+                    }
+                }
+            }
+            if(this.bird.carryingBranch){
+                if(Math.abs(14-this.bird.position_x < 6 && Math.abs(5-this.bird.position_z) < 6)){
+                    this.bird.carryingBranch=false;
+                }
+            }
         }
 
         if (keysPressed) {
@@ -235,7 +261,7 @@ class MyScene extends CGFscene {
         
         //Applying cubemap
         //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.translate(0.5, 0.5, 0.5);
         this.scale(60, 60, 60);
         this.translate(0, 0.485, 0);
@@ -256,7 +282,7 @@ class MyScene extends CGFscene {
         this.scale(3, 3, 3);
         this.house.display();
         this.popMatrix();
-        
+        */
         //Applying the bird
         this.pushMatrix();
         this.translate(0, 15 + this.height, 0);
@@ -265,36 +291,48 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         //Applying the branches
-        this.pushMatrix();
-        this.rotate(Math.PI/2, 1, 0.5, 0);
-        this.translate(-5, 5, -4.5);
-        this.branches[0].display();
-        this.popMatrix();
+        if(this.branchesbool[0]){
+            this.pushMatrix();
+            //this.rotate(Math.PI/2, 1, 0.5, 0);
+            this.translate(this.coords[0][0], this.coords[0][1], this.coords[0][2]);
+            this.rotate(Math.PI/2, 1, 0.5, 0);
+            this.branches[0].display();
+            this.popMatrix();
+        }
 
-        this.pushMatrix();
-        this.rotate(Math.PI/2, 1, -0.5, 0);
-        this.translate(12, 3.5, -9);
-        this.branches[1].display();
-        this.popMatrix();
+        if(this.branchesbool[1]){
+            this.pushMatrix();
+            //this.rotate(Math.PI/2, 1, -0.5, 0);
+            this.translate(this.coords[1][0], this.coords[1][1], this.coords[1][2]);
+            this.rotate(Math.PI/2, 1, -0.5, 0);
+            this.branches[1].display();
+            this.popMatrix();
+        }
 
-        this.pushMatrix();
-        this.rotate(Math.PI/2, 1, 0.3, 0);
-        this.translate(-11, -5, -8);
-        this.branches[2].display();
-        this.popMatrix();
+        if(this.branchesbool[2]){
+            this.pushMatrix();
+            //this.rotate(Math.PI/2, 1, 0.3, 0);
+            this.translate(this.coords[2][0], this.coords[2][1], this.coords[2][2]);
+            this.rotate(Math.PI/2, 1, 0.3, 0);
+            this.branches[2].display();
+            this.popMatrix();
+        }
 
-        this.pushMatrix();
-        this.rotate(Math.PI/2, 1, 0, 0);
-        this.translate(6.8, -12, -3.4);
-        this.branches[3].display();
-        this.popMatrix();
+        if(this.branchesbool[3]){
+            this.pushMatrix();
+            //this.rotate(Math.PI/2, 1, 0, 0);
+            this.translate(this.coords[3][0], this.coords[3][1], this.coords[3][2]);
+            this.rotate(Math.PI/2, 1, 0, 0);
+            this.branches[3].display();
+            this.popMatrix();
+        }
 
         //Applying the nest
         this.pushMatrix();
         this.translate(0, 4, 0);
         this.nest.display();
         this.popMatrix();
-
+/*
         //Applying lightning
         if(this.displayLightning){
             this.pushMatrix();
@@ -356,7 +394,7 @@ class MyScene extends CGFscene {
         this.scale(1.5, 2, 1.5);
         this.lSystem.display();
         this.popMatrix();
-        this.popMatrix();
+        this.popMatrix();*/
 
         // ---- END Primitive drawing section
     }

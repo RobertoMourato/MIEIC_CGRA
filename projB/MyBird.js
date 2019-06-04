@@ -13,6 +13,7 @@ class MyBird extends CGFobject {
         this.nose = new MyCone(scene, 4, 1);
         this.wingLeft = new MyWing(scene, 0);
         this.wingRight = new MyWing(scene, 1);
+        this.branchCarried = new MyTreeBranch(this.scene);
 
         this.height = 0;
         this.angle = 0;
@@ -22,12 +23,21 @@ class MyBird extends CGFobject {
         this.position_z = 0;
 
         this.down = false;
+        this.carryingBranch = false;
     }
  
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.position_x, this.position_y, this.position_z);
         this.scene.rotate(this.angle, 0, 1, 0);
+
+            if(this.carryingBranch){
+                this.scene.pushMatrix();
+                this.scene.translate(1.45,1,-0.1);
+                this.scene.rotate(Math.PI/2, 1, 0.5, 0);
+                this.branchCarried.display();
+                this.scene.popMatrix();
+            }
 
             this.scene.pushMatrix();
             this.scene.birdColor.apply();
